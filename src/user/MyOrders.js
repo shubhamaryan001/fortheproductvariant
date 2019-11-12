@@ -12,7 +12,7 @@ import {
   AccordionItemPanel
 } from "react-accessible-accordion";
 import "react-accessible-accordion/dist/fancy-example.css";
-const Cancelled="";
+const Cancelled = "";
 const MyOrders = () => {
   const [order, setOrder] = useState([]);
 
@@ -31,7 +31,6 @@ const MyOrders = () => {
     });
   };
 
-
   useEffect(() => {
     initOrder(_id, token);
   }, []);
@@ -45,19 +44,15 @@ const MyOrders = () => {
     </div>
   );
 
-
-
-//   const showOrdersStatus = () => {
-//   if (order.status) {
-//     return ( <
-//     {console.log(order.status)}
-//     );
-//   } else {
-//     return <h1 > No orders < /h1>;
-//   }
-// };
-
-
+  //   const showOrdersStatus = () => {
+  //   if (order.status) {
+  //     return ( <
+  //     {console.log(order.status)}
+  //     );
+  //   } else {
+  //     return <h1 > No orders < /h1>;
+  //   }
+  // };
 
   const showOrdersLength = () => {
     if (order.length > 0) {
@@ -88,16 +83,9 @@ const MyOrders = () => {
                       <div className="container">
                         <div className="row">
                           <div className="col-4">
-                            {" "}
-                            <h6
-                              style={{
-                                backgroundColor: "#00FFBB",
-                                overflowWrap: "break-word"
-                              }}
-                            >
-                              {" "}
-                              Order Id: {o._id}
-                            </h6>
+                            <Link to={`/order/customer/${o._id}`}>
+                              <b> More Details</b>
+                            </Link>
                           </div>
                           <div className="col-4">
                             {" "}
@@ -105,9 +93,6 @@ const MyOrders = () => {
                               Order Status:
                               <span class="mt-4 badge badge-info">
                                 {o.status}
-
-
-
                               </span>
                             </p>
                           </div>
@@ -117,27 +102,22 @@ const MyOrders = () => {
                           </div>
                         </div>
 
-
-                          <div className="row">
-
-<div className="col-12">
-
-
-< div > {
-o.status === 'Cancelled' ? ( <
-  p > refund Will Inisitaed Within 24hrs so please be paictence till 24hrs < /p>
-) : ""
-} <
-/div>
-
-
-
-
-</div>
-
-
+                        <div className="row">
+                          <div className="col-12">
+                            <div>
+                              {" "}
+                              {o.status === "Cancelled" ? (
+                                <p>
+                                  {" "}
+                                  refund Will Inisitaed Within 24hrs so please
+                                  be paictence till 24hrs{" "}
+                                </p>
+                              ) : (
+                                ""
+                              )}{" "}
+                            </div>
                           </div>
-
+                        </div>
                       </div>
                     </AccordionItemButton>
                   </AccordionItemHeading>
@@ -154,7 +134,7 @@ o.status === 'Cancelled' ? ( <
                         <b>Amount:</b>₹ {o.amount}
                       </li>{" "}
                       <li className="list-group-item">
-                        <b>Ordered by:</b> {o.user.name}
+                        <b>Ordered by:</b> {o.OrderedBy.name}
                       </li>{" "}
                       <li className="list-group-item">
                         <b>Ordered on: </b> {moment(o.createdAt).fromNow()}{" "}

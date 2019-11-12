@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import ShowImage from "./ShowImage";
 import { isAuthenticated } from "../auth";
-
+import renderHTML from "react-render-html";
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement,
+  htmlparser2
+} from "react-html-parser";
 import { addItem, updateItem, removeItem } from "./cartHelpers";
 
 import "../index.css";
@@ -34,8 +39,10 @@ const Card = ({
     return (
       showViewProductDescription && (
         <p class="card-text">
-          {product.description.substring(0, 100)}
-          <Link to={`/product/${product._id}`}>Read More</Link>
+          {product.short_description.substring(0, 100)}
+          <Link to={`/product/${product._id}`}>
+            <b>Read More</b>
+          </Link>
         </p>
       )
     );

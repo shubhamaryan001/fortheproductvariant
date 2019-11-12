@@ -50,18 +50,38 @@ const Orders = () => {
       <input type="text" value={value} className="form-control" readOnly />
     </div>
   );
+
+  const getTotal = () => {
+    return orders.reduce((currentValue, nextValue) => {
+      return currentValue + nextValue.amount;
+    }, 0);
+  };
+
   const showOrdersLength = () => {
     if (orders.length > 0) {
       return (
-        <h1 className="text-danger display-2">Total orders: {orders.length}</h1>
+        <>
+          <h1 className="text-danger display-2">
+            Total orders: {orders.length}
+          </h1>
+          <h4 className="card-header">Total Earning Rs. {getTotal()}</h4>
+        </>
       );
     } else {
       return <h1 className="text-danger">No orders</h1>;
     }
   };
 
-  const handleStatusChange = (e, orderId,orderEmail,orderMobile) => {
-    updateOrderStatus(user._id, token, orderId, e.target.value,orderEmail,orderMobile).then(data => {
+  const handleStatusChange = (e, orderId, orderEmail, orderMobile) => {
+    console.log(e.target.value);
+    updateOrderStatus(
+      user._id,
+      token,
+      orderId,
+      e.target.value,
+      orderEmail,
+      orderMobile
+    ).then(data => {
       if (data.error) {
         console.log("Status update failed");
       } else {
@@ -72,12 +92,12 @@ const Orders = () => {
   const showStatus = o => (
     <div className="form-group">
       <h3 className="mark mb-4">Status: {o.status}</h3>
-      <h3 className="mark mb-4">Status: {o.user.email}</h3>
-      <h3 className="mark mb-4">Status: {o.user.mobile}</h3>
 
       <select
         className="form-control"
-        onChange={e => handleStatusChange(e, o._id,o.user.email,o.user.mobile)}
+        onChange={e =>
+          handleStatusChange(e, o._id, o.OrderedBy.email, o.OrderedBy.mobile)
+        }
       >
         <option>Update Status</option>
         {statusValues.map((status, index) => (
@@ -148,15 +168,16 @@ const Orders = () => {
                         <b>Amount:</b>₹ {o.amount}
                       </li>{" "}
                       <li className="list-group-item">
-                        <b>Ordered by:</b> {o.user.name}
-                      </li>{" "}
-                      <li className="list-group-item">
                         <b>Ordered on: </b> {moment(o.createdAt).fromNow()}{" "}
                       </li>
                       <li className="list-group-item">
                         <b>Any Note: </b>
                         {o.note}
                       </li>{" "}
+                      <li className="list-group-item"></li>
+                      <Link to={`/order/${o._id}`}>
+                        <b>Read More</b>
+                      </Link>
                     </ul>
 
                     <h4 className=" text-center mt-4 mb-4 font-italic">
@@ -251,7 +272,7 @@ const Orders = () => {
     //                 Payment Mode: {o.payment_mode}
     //               </li>
     //               <li className="list-group-item">Amount: ${o.amount}</li>
-    //               <li className="list-group-item">Ordered by: {o.user.name}</li>
+    //               <li className="list-group-item">Ordered by: {o.OrderedBy.name}</li>
     //               <li className="list-group-item">
     //                 Ordered on: {moment(o.createdAt).fromNow()}
     //               </li>

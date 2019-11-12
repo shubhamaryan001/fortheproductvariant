@@ -6,8 +6,10 @@ import Home from "./core/Home";
 import Shop from "./core/Shop";
 import ForgotPassword from "./user/ForgotPassword";
 import ResetPassword from "./user/ResetPassword";
-
+import SingleOrder from "./admin/SingleOrder";
 import Menu from "./core/Menu";
+import MobileMenu from "./core/MobileMenu";
+
 import Footer from "./core/Footer";
 import AboutUs from "./core/AboutUs";
 import Dashboard from "./user/UserDashboard";
@@ -23,13 +25,14 @@ import Orders from "./admin/Orders";
 import ManageProducts from "./admin/ManageProducts";
 import UpdateProduct from "./admin/UpdateProduct";
 import Profile from "./user/Profile";
-
+import DetailOrder from "./user/DetailOrder";
 import MyOrders from "./user/MyOrders";
 import Successfull from "./core/Successfull";
-
+import NotFoundPage from "./core/NotFoundPage";
 const Routes = () => {
   return (
     <BrowserRouter>
+      <MobileMenu />
       <Menu />
       <Switch>
         <Route path="/" exact component={Home} />
@@ -53,11 +56,18 @@ const Routes = () => {
           component={MyOrders}
         />
         <PrivateRoute path="/order/successfull" exact component={Successfull} />
+        <PrivateRoute
+          path="/order/customer/:orderId"
+          exact
+          component={DetailOrder}
+        />
+
         <AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
         <AdminRoute path="/create/category" exact component={AddCategory} />
         <AdminRoute path="/create/coupon" exact component={AddCoupon} />
         <AdminRoute path="/create/product" exact component={AddProduct} />
         <AdminRoute path="/admin/orders" exact component={Orders} />
+        <AdminRoute path="/order/:orderId" exact component={SingleOrder} />
         <AdminRoute path="/admin/products" exact component={ManageProducts} />
         <AdminRoute
           path="/admin/product/update/:productId"
@@ -65,8 +75,9 @@ const Routes = () => {
           component={UpdateProduct}
         />
         <PrivateRoute path="/cart" exact component={Cart} />
+
+        <Route component={NotFoundPage} />
       </Switch>
-      <Footer />
     </BrowserRouter>
   );
 };

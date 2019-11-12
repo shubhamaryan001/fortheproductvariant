@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap");
+@import "../../node_modules/antd/dist/antd.css";
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap");
+
+.navbar {
+  z-index: 3000;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  margin-top: 38px;
+}
+
+.navbar .nav-link {
+  text-decoration: none;
+
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: none;
+  color: black !important;
+  letter-spacing: 0.5px;
+}
+
+.nav-top-bar a {
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 13.464px;
+  z-index: 3000;
+}
+
+.nav-top-bar a:hover {
+  text-decoration: none !important;
+}
+.nav-top-bar a:visited {
+  text-decoration: none !important;
+}
+
+#desktopmenu {
+  display: inline;
+}
+#mobileMenu {
+  display: none;
+}
+
+@media screen and (max-width: 990px) {
+  #desktopMenu {
+    display: none !important;
+  }
+
+  #mobileMenu {
+    display: block;
+  }
+}

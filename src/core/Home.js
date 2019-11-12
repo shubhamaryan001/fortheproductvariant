@@ -14,10 +14,8 @@ const Home = () => {
     <>
       <div className="container-fluid p-0 mb-0 ">
         <MainSection />
-        <Search />
+        {/* <Search /> */}
       </div>
-      <NewlyAdded />
-      <MostSell />
     </>
   );
 };

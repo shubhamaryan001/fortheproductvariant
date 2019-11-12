@@ -4,7 +4,6 @@ import { Link, Redirect } from "react-router-dom";
 import { read, update, updateUser } from "./apiUser";
 import { API } from "../config";
 
-
 class Profile extends Component {
   constructor() {
     super();
@@ -13,6 +12,8 @@ class Profile extends Component {
       name: "",
       email: "",
       password: "",
+      role: "",
+      wallet_balance: "",
       redirectToProfile: false,
       error: "",
       fileSize: 0,
@@ -31,9 +32,12 @@ class Profile extends Component {
           id: data._id,
           name: data.name,
           email: data.email,
+          role: data.role,
+          wallet_balance: data.wallet_balance,
           error: "",
           about: data.about
         });
+        console.log(data);
       }
     });
   };
@@ -110,7 +114,7 @@ class Profile extends Component {
     }
   };
 
-  signupForm = (name, email, password, about) => (
+  signupForm = (name, email, password, about, role, wallet_balance) => (
     <form>
       <div className="form-group">
         <label className="text-muted">Profile Photo</label>
@@ -151,6 +155,26 @@ class Profile extends Component {
       </div>
 
       <div className="form-group">
+        <label className="text-muted">Role</label>
+        <textarea
+          onChange={this.handleChange("role")}
+          type="number"
+          className="form-control"
+          value={role}
+        />
+      </div>
+
+      <div className="form-group">
+        <label className="text-muted">wallet_balance</label>
+        <textarea
+          onChange={this.handleChange("wallet_balance")}
+          type="number"
+          className="form-control"
+          value={wallet_balance}
+        />
+      </div>
+
+      <div className="form-group">
         <label className="text-muted">Password</label>
         <input
           onChange={this.handleChange("password")}
@@ -174,18 +198,18 @@ class Profile extends Component {
       redirectToProfile,
       error,
       loading,
-      about
+      about,
+      role,
+      wallet_balance
     } = this.state;
 
     if (redirectToProfile) {
       return <Redirect to={`/user/${id}`} />;
     }
-const user = isAuthenticated().user;
+    const user = isAuthenticated().user;
     const photoUrl = user._id
-          ? `${API}/user/photo/${
-              user._id
-            }?${new Date().getTime()}`
-          : "";
+      ? `${API}/user/photo/${user._id}?${new Date().getTime()}`
+      : "";
 
     return (
       <div className="container">
@@ -206,12 +230,11 @@ const user = isAuthenticated().user;
         )}
 
         <img
-                     style={{ height: "200px", width: "auto" }}
-                     className="img-thumbnail"
-                     src={photoUrl}
-
-                     alt={user.name}
-                   />
+          style={{ height: "200px", width: "auto" }}
+          className="img-thumbnail"
+          src={photoUrl}
+          alt={user.name}
+        />
 
         {isAuthenticated().user.role === "admin" &&
           this.signupForm(name, email, password, about)}
@@ -222,6 +245,5 @@ const user = isAuthenticated().user;
     );
   }
 }
-
 
 export default Profile;

@@ -70,9 +70,9 @@ const Footer = () => (
                 Get Started<span></span>
               </h5>
               <p>Get access to your full Training and Marketing Suite.</p>
-              <a class="btn button-footer" to="/signin" >
+              <Link class="btn button-footer" to="/signin">
                 Register Now
-              </a>
+              </Link>
             </div>
           </div>
 
