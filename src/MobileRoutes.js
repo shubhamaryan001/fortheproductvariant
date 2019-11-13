@@ -16,7 +16,7 @@ const MobileRoutes = () => {
           path="/"
           exact
           component={() => {
-            window.location.href = "https://floorplanbazaar.com";
+            window.location.href = "https://ionic-app-floor.herokuapp.com/";
             return null;
           }}
         />
