@@ -2,7 +2,7 @@ import React from "react";
 import { FiShoppingBag } from "react-icons/fi";
 import { Animated } from "react-animated-css";
 import Typed from "react-typed";
-
+import Newly from "./NewlyAdded";
 import "../index.css";
 
 const MainSection = () => {
@@ -10,6 +10,7 @@ const MainSection = () => {
     <div className="container-fluid bg-warning">
       <div className="row">
         <div className="col-lg-6 col-md-6 col-sm-12">
+          <div className=""></div>
           <h1>
             <Typed
               strings={["Here you can find anything", "FloorPlanBazaar.com"]}
@@ -19,7 +20,9 @@ const MainSection = () => {
             />
           </h1>
         </div>
-        <div className="col-lg-6 col-md-6 col-sm-12"></div>
+        <div className="col-lg-6 col-md-6 col-sm-12">
+          <Newly />
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,16 @@
-import React from "react";
+import React, { Component } from "react";
+import Routes from "./Routes";
+import MobileRoutes from "./MobileRoutes";
+import withSizes from "react-sizes";
 
-const App = () => <div>HELLO FROM REACT</div>;
+class App extends Component {
+  render() {
+    return <div>{this.props.isMobile ? <MobileRoutes /> : <Routes />}</div>;
+  }
+}
 
-export default App;
+const mapSizesToProps = ({ width }, { mobileBreakpoint }) => ({
+  isMobile: width < 480
+});
+
+export default withSizes(mapSizesToProps)(App);

@@ -24,6 +24,7 @@
     "react-render-html": "^0.6.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.1.2",
+    "react-sizes": "^2.0.0",
     "react-typed": "^1.2.0"
   },
   "scripts": {

@@ -44,6 +44,7 @@ const NewlyAdded = () => {
         });
       } else {
         setProductsByArrival(data);
+
         setValues({
           loading: false
         });
@@ -53,6 +54,7 @@ const NewlyAdded = () => {
 
   useEffect(() => {
     loadProductsByArrival();
+    console.log(productsByArrival);
   }, []);
 
   const showLoading = () =>
@@ -69,7 +71,9 @@ const NewlyAdded = () => {
     <>
       <div className="container-fluid  products-by-arrival pl-5 pr-5 ">
         <div className="row">
-          <h2 className="products-Heading text-uppercase mb-4">New Arrivals</h2>
+          <h2 className="products-Heading text-uppercase mb-4">
+            New Arrivals {console.log(productsByArrival.name)}
+          </h2>
           <div className="col-12">
             <Carousel
               swipeable={true}
