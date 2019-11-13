@@ -12,7 +12,14 @@ const MobileRoutes = () => {
       <MobileMenu />
       <Menu />
       <Switch>
-        <Route path="/" exact component={AboutUs} />
+        <Route
+          path="/"
+          exact
+          component={() => {
+            window.location.href = "https://floorplanbazaar.com";
+            return null;
+          }}
+        />
       </Switch>
     </BrowserRouter>
   );
