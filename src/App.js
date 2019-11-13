@@ -10,7 +10,7 @@ class App extends Component {
 }
 
 const mapSizesToProps = ({ width }, { mobileBreakpoint }) => ({
-  isMobile: width < 480
+  isMobile: width < 1080
 });
 
 export default withSizes(mapSizesToProps)(App);
