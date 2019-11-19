@@ -43,6 +43,11 @@ const MyOrders = () => {
       <input type="text" value={value} className="form-control" readOnly />
     </div>
   );
+  const sort = order.sort(function(a, b) {
+    if (a.createdAt < b.createdAt) return 1;
+
+    if (a.createdAt > b.createdAt) return -1;
+  });
 
   //   const showOrdersStatus = () => {
   //   if (order.status) {

@@ -96,6 +96,7 @@ const Checkout = ({ products }) => {
       if (deductUserBalance.success) {
         const createOrderData = {
           products: products,
+          name: "floorplanbazaar",
           transaction_id: "Undifine",
           amount: amount,
           payment_mode: "Wallet Payment",

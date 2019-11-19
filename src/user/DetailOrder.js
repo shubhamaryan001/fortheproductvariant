@@ -25,6 +25,7 @@ const DetailOrder = props => {
 
   const { redirectToReferrer } = values;
   const cancel = true;
+
   const loadSingleOrder = orderId => {
     getSingleOrder(orderId, user._id, token).then(data => {
       if (data.error) {
@@ -50,6 +51,7 @@ const DetailOrder = props => {
       }
     });
   };
+
   const contentcancel = () => {
     return (
       <div>
@@ -78,6 +80,42 @@ const DetailOrder = props => {
     const orderId = props.match.params.orderId;
     loadSingleOrder(orderId, user._id, token);
   }, [props]);
+
+  var tomorrow = moment(order.createdAt).add(4, "hours");
+
+  var Today = moment();
+
+  const showButton = () => {
+    if (Today < tomorrow) {
+      return (
+        <>
+          <Button type="danger" onClick={showConfirm} shape="round" icon="stop">
+            Cancel Project
+          </Button>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Button
+            disabled
+            type="danger"
+            onClick={showConfirm}
+            shape="round"
+            icon="stop"
+          >
+            Cancel Project
+          </Button>
+          <br />
+          <small>
+            <sup>Under 4 Hrs from ordered is over</sup>
+          </small>
+        </>
+      );
+    }
+  };
+  console.log(Today);
+  console.log(tomorrow);
 
   const redirectUser = () => {
     if (redirectToReferrer) {
@@ -214,17 +252,23 @@ const DetailOrder = props => {
                   {order.cancelled === false ? (
                     <>
                       <ul className="list-inline">
-                        <li className="list-inline-item">
-                          <Button
-                            type="danger"
-                            onClick={showConfirm}
-                            shape="round"
-                            icon="stop"
-                          >
-                            Cancel Project
-                          </Button>
-                        </li>
-
+                        <li className="list-inline-item">{showButton()}</li>
+                        {/* {time ? (
+                          <>
+                            <li className="list-inline-item">
+                              <Button
+                                type="danger"
+                                onClick={showConfirm}
+                                shape="round"
+                                icon="stop"
+                              >
+                                Cancel Project
+                              </Button>
+                            </li>
+                          </>
+                        ) : (
+                          <>Not Able to cancel</>
+                        )} */}
                         <li className="list-inline-item">
                           <div>
                             <a
@@ -245,6 +289,20 @@ const DetailOrder = props => {
                       please be patience till 24hrs after that u will come to
                       support
                     </h6>
+                  )}
+
+                  {order.ready === true ? (
+                    <>
+                      {order.secondpayment === false ? (
+                        <>
+                          <button>{order.secondpaymentamount}</button>
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </>
+                  ) : (
+                    ""
                   )}
                 </>
               ) : (

@@ -57,6 +57,36 @@ const Orders = () => {
     }, 0);
   };
 
+  const getfilter = orders.filter(
+    (order, index, orders) => order.ready === true
+  );
+  const sort = orders.sort(function(a, b) {
+    if (a.createdAt < b.createdAt) return 1;
+    if (a.createdAt > b.createdAt) return -1;
+  });
+
+  const showFilter = () => {
+    if (getfilter.length > 0) {
+      return (
+        <>
+          {getfilter.map((k, index) => {
+            return (
+              <div key={index}>
+                <p>{k.transaction_id}</p>
+                <p>{k.amount}</p>
+                <p>{k._id}</p>
+              </div>
+            );
+          })}
+        </>
+      );
+    } else {
+      return <>Not Found</>;
+    }
+  };
+
+  console.log(getfilter, sort);
+
   const showOrdersLength = () => {
     if (orders.length > 0) {
       return (
@@ -112,6 +142,8 @@ const Orders = () => {
   return (
     <div className="container-fluid standard-height">
       <h2> {showOrdersLength()}</h2>
+
+      {showFilter()}
       <div className="row">
         {orders.map((o, oIndex) => {
           return (

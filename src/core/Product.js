@@ -14,6 +14,7 @@ import ReactHtmlParser, {
 const Product = props => {
   let [product, setProduct] = useState({});
   const [price, setPrice] = useState();
+  const [name, setName] = useState();
   const [relatedProduct, setRelatedProduct] = useState([]);
   const [error, setError] = useState(false);
   const [redirect, setRedirect] = useState(false);
@@ -25,6 +26,7 @@ const Product = props => {
       } else {
         setProduct(data);
         setPrice(data.price);
+        setName(data.name);
 
         // fetch related products
         listRelated(data._id).then(data => {
@@ -86,16 +88,15 @@ const Product = props => {
 
   const RenderVariant = e => {
     e.preventDefault();
-    let price = e.target.id;
-    let area = e.target.name;
-
-    setPrice(e.target.id);
+    let price = e.target.dataset.price;
+    let area = e.target.dataset.area;
+    setPrice(e.target.dataset.price);
     let newProduct = product;
-
-    if (product.name.includes("variant"))
-      product.name = product.name.split("variant")[0];
-
+    if (product.name.includes("variant")) {
+      product.name = product.name.split("variant")[0].trim();
+    }
     product.name = `${product.name} variant - ${area} sq. ft.`;
+    setName(product.name);
     newProduct.variantSelected = area + "sq. ft.";
     newProduct.price = parseInt(price);
     setProduct(newProduct);
@@ -152,16 +153,18 @@ const Product = props => {
           <div className="card  p-5" style={{ backgroundColor: "#edeaec" }}>
             <ProductImage class="card-img-top" item={product} url="product" />
             <h1 className="text-center" style={{ textTransform: "uppercase" }}>
-              {product.name}
+              {name}
+              {console.log(product)}
             </h1>
             {product.variants &&
               product.variants.length > 0 &&
               product.variants.map((item, index) => (
                 <button
                   key={index}
-                  id={item.price}
-                  name={item.area}
-                  className="btn btn-success btn-raised "
+                  // id={item.price}
+                  data-area={item.area}
+                  data-price={item.price}
+                  className="btn btn-success btn-raised"
                   style={{ textTransform: "uppercase" }}
                   onClick={RenderVariant}
                 >
