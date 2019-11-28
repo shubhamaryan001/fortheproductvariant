@@ -165,9 +165,22 @@ const Checkout = ({ products }) => {
     );
   };
 
+  const getfilter = products.filter(
+    (product, index, products) => product.category.name === "Floor Plan"
+  );
+
+  const showFilter = () => {
+    if (getfilter.length > 0) {
+      return <>Finded</>;
+    } else {
+      return <>Not Found</>;
+    }
+  };
+
   const showCheckout = () => {
     return isAuthenticated() ? (
       <div>
+        {console.log(products)}
         <FiChevronsRight className="FiChevronsRight" />
 
         <button
@@ -216,6 +229,7 @@ const Checkout = ({ products }) => {
           <tr>
             <td>
               <p>
+                {showFilter()}
                 <a
                   className="btn btn-raised"
                   data-toggle="collapse"

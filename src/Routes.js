@@ -28,6 +28,8 @@ import Profile from "./user/Profile";
 import DetailOrder from "./user/DetailOrder";
 import MyOrders from "./user/MyOrders";
 import Successfull from "./core/Successfull";
+import AdminDashboardMain from "./admin/AdminDashBoardMain";
+
 import NotFoundPage from "./core/NotFoundPage";
 const Routes = () => {
   return (
@@ -73,6 +75,12 @@ const Routes = () => {
           path="/admin/product/update/:productId"
           exact
           component={UpdateProduct}
+        />
+
+        <AdminRoute
+          path="/admin/dashboard-main"
+          exact
+          component={AdminDashboardMain}
         />
         <PrivateRoute path="/cart" exact component={Cart} />
 

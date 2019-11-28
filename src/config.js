@@ -1,1 +1,5 @@
-export const API = process.env.REACT_APP_API_URL;
+export const API = "http://localhost:8000/api";
+
+// export const API = process.env.REACT_APP_API_URL;
+
+// ***REACT_APP_API_URLll=https://nodelatest-api.herokuapp.com/api

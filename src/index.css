@@ -10,7 +10,7 @@ body {
   font-weight: 600;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin-top: 110px !important;
+  margin-top: 100px !important;
 }
 
 @media screen and (max-width: 990px) {

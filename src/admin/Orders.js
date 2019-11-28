@@ -11,6 +11,9 @@ import {
   AccordionItemPanel
 } from "react-accessible-accordion";
 import "react-accessible-accordion/dist/fancy-example.css";
+import SideBar from "./SideBar";
+import { Tag } from "antd";
+
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [statusValues, setStatusValues] = useState([]);
@@ -22,6 +25,7 @@ const Orders = () => {
       if (data.error) {
         console.log(data.error);
       } else {
+        console.log(data);
         setOrders(data);
       }
     });
@@ -94,7 +98,6 @@ const Orders = () => {
           <h1 className="text-danger display-2">
             Total orders: {orders.length}
           </h1>
-          <h4 className="card-header">Total Earning Rs. {getTotal()}</h4>
         </>
       );
     } else {
@@ -140,202 +143,62 @@ const Orders = () => {
   );
 
   return (
-    <div className="container-fluid standard-height">
-      <h2> {showOrdersLength()}</h2>
+    <div className="wrapper">
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-2">
+            <SideBar />
+          </div>
 
-      {showFilter()}
-      <div className="row">
-        {orders.map((o, oIndex) => {
-          return (
-            <div key={oIndex} className="col-6 mb-3">
-              <Accordion
-                style={{ width: "90%", margin: "0 auto" }}
-                allowZeroExpanded={true}
-              >
-                <AccordionItem>
-                  <AccordionItemHeading>
-                    <AccordionItemButton>
-                      <div className="container">
-                        <div className="row">
-                          <div className="col-4">
-                            {" "}
-                            <h6
-                              style={{
-                                backgroundColor: "#00FFBB",
-                                overflowWrap: "break-word"
-                              }}
-                            >
-                              {" "}
-                              Order Id: {o._id}
-                            </h6>
-                          </div>
-                          <div className="col-4">
-                            {" "}
-                            <p>
-                              Order Status:
-                              <span class="mt-4 badge badge-info">
-                                {o.status}
-                              </span>
-                            </p>
-                          </div>
-                          <div className="col-4">
-                            {" "}
-                            <b>Ordered on: </b> {moment(o.createdAt).fromNow()}
-                          </div>
+          <div className="col-md-10" style={{ marginTop: "5rem" }}>
+            <div className="row">
+              {orders.map((o, i) => {
+                return (
+                  <div key={i} className="col-md-4">
+                    <div className="card" style={{ width: "25rem" }}>
+                      {o.status === "Order Confirmed" ? (
+                        <div
+                          className="card-header text-center"
+                          style={{ backgroundColor: "#ffec3d" }}
+                        >
+                          <h5>Order Id: {o._id}</h5>
+
+                          <Tag color="#2db7f5">{o.status}</Tag>
                         </div>
+                      ) : (
+                        <div
+                          className="card-header text-center "
+                          style={{ backgroundColor: "#a0d911" }}
+                        >
+                          <h5>Order Id: {o._id}</h5>
+                          <Tag color="#87d068">{o.status}</Tag>
+                        </div>
+                      )}
+                      <div className="card-content">
+                        <ul className="list-inlin">
+                          <li class="list-inline-item">OrderedBy</li>
+                          <li class="list-inline-item"> {o.OrderedBy.name}</li>
+                        </ul>
+                        <ul className="list-inlin">
+                          <li class="list-inline-item">User Register Mobile</li>
+                          <li class="list-inline-item">{o.OrderedBy.mobile}</li>
+                        </ul>
                       </div>
-                    </AccordionItemButton>
-                  </AccordionItemHeading>
-                  <AccordionItemPanel>
-                    <ul className="list-group mb-2">
-                      <li className="list-group-item">{showStatus(o)}</li>
-                      <li className="list-group-item">
-                        <b>Transaction ID: </b> {o.transaction_id}{" "}
-                      </li>{" "}
-                      <li className="list-group-item ">
-                        <b>Payment Mode: </b>
-                        {o.payment_mode}{" "}
-                      </li>{" "}
-                      <li className="list-group-item">
-                        <b>Amount:</b>₹ {o.amount}
-                      </li>{" "}
-                      <li className="list-group-item">
-                        <b>Ordered on: </b> {moment(o.createdAt).fromNow()}{" "}
-                      </li>
-                      <li className="list-group-item">
-                        <b>Any Note: </b>
-                        {o.note}
-                      </li>{" "}
-                      <li className="list-group-item"></li>
-                      <Link to={`/order/${o._id}`}>
-                        <b>Read More</b>
+                      <Link
+                        className="btn btn-raised btn-info"
+                        to={`/order/${o._id}`}
+                      >
+                        Order Details
                       </Link>
-                    </ul>
-
-                    <h4 className=" text-center mt-4 mb-4 font-italic">
-                      <b>Total products in the order: {o.products.length}</b>
-                    </h4>
-
-                    <div className="text-center">
-                      <div className="row mb-3">
-                        <div
-                          className="col-3"
-                          style={{ backgroundColor: "#00ffbb" }}
-                        >
-                          <b>Product Name</b>
-                        </div>
-                        <div
-                          className="col-3"
-                          style={{ backgroundColor: "#00ffbb" }}
-                        >
-                          <b>Ordered Quantity</b>
-                        </div>
-                        <div
-                          className="col-3"
-                          style={{ backgroundColor: "#00ffbb" }}
-                        >
-                          <b>Product Price</b>
-                        </div>
-
-                        <div
-                          className="col-3"
-                          style={{ backgroundColor: "#00ffbb" }}
-                        >
-                          <b>Product Id</b>
-                        </div>
-                      </div>
-                      {o.products.map((p, pIndex) => (
-                        <div key={pIndex} className="row border border-success">
-                          <div className="col-md-3">
-                            <p>{p.name}</p>
-                          </div>
-                          <div className="col-md-3">
-                            {" "}
-                            <p>{p.count}</p>
-                          </div>
-                          <div className="col-md-3">
-                            {" "}
-                            <p>₹{p.price}</p>
-                          </div>
-                          <div className="col-md-3">
-                            {" "}
-                            <p
-                              style={{
-                                backgroundColor: "#00FFBB",
-                                overflowWrap: "break-word"
-                              }}
-                            >
-                              {p._id}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
                     </div>
-                  </AccordionItemPanel>
-                </AccordionItem>
-              </Accordion>
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
+          </div>
+        </div>
       </div>
     </div>
-
-    // <div className="container mt-5 mb-5 pl-3 pr-3">
-    //   <h5 className="mb-2"> {showOrdersLength()}</h5>
-    //   <div className="row">
-    //     {orders.map((o, oIndex) => {
-    //       return (
-    //         <div className="col-md-4 mt-5">
-    //           <div
-    //             key={oIndex}
-    //             className="card"
-    //             style={{ borderBottom: "5px solid green", width: "22rem" }}
-    //           >
-    //             <h4 className="text-center mb-5">
-    //               <span className="bg-warning ">Order ID: {o._id}</span>
-    //             </h4>
-
-    //             <ul className="list-group mb-2">
-    //               <li className="list-group-item">{showStatus(o)}</li>
-    //               <li className="list-group-item">
-    //                 Transaction ID: {o.transaction_id}
-    //               </li>
-    //               <li className="list-group-item">
-    //                 Payment Mode: {o.payment_mode}
-    //               </li>
-    //               <li className="list-group-item">Amount: ${o.amount}</li>
-    //               <li className="list-group-item">Ordered by: {o.OrderedBy.name}</li>
-    //               <li className="list-group-item">
-    //                 Ordered on: {moment(o.createdAt).fromNow()}
-    //               </li>
-    //               <li className="list-group-item">Any Note: {o.note}</li>
-    //             </ul>
-
-    //             <h4 className=" text-center mt-4 mb-4 font-italic">
-    //               Total products in the order: {o.products.length}
-    //             </h4>
-    //           </div>
-
-    //           {o.products.map((p, pIndex) => (
-    //             <div
-    //               className="mb-4"
-    //               key={pIndex}
-    //               style={{
-    //                 padding: "20px",
-    //                 border: "1px solid indigo"
-    //               }}
-    //             >
-    //               {showInput("Product name", p.name)}
-    //               {showInput("Product price", p.price)}
-    //               {showInput("Product total", p.count)}
-    //               {showInput("Product Id", p._id)}
-    //             </div>
-    //           ))}
-    //         </div>
-    //       );
-    //     })}
-    //   </div>
-    // </div>
   );
 };
 export default Orders;
