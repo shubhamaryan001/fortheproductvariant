@@ -8,7 +8,6 @@ import ForgotPassword from "./user/ForgotPassword";
 import ResetPassword from "./user/ResetPassword";
 import SingleOrder from "./admin/SingleOrder";
 import Menu from "./core/Menu";
-import MobileMenu from "./core/MobileMenu";
 
 import Footer from "./core/Footer";
 import AboutUs from "./core/AboutUs";
@@ -34,7 +33,6 @@ import NotFoundPage from "./core/NotFoundPage";
 const Routes = () => {
   return (
     <BrowserRouter>
-      <MobileMenu />
       <Menu />
       <Switch>
         <Route path="/" exact component={Home} />

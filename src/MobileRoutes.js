@@ -2,21 +2,19 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Menu from "./core/Menu";
-import MobileMenu from "./core/MobileMenu";
 
 import AboutUs from "./core/AboutUs";
 
 const MobileRoutes = () => {
   return (
     <BrowserRouter>
-      <MobileMenu />
       <Menu />
       <Switch>
         <Route
           path="/"
           exact
           component={() => {
-            window.location.href = "https://ionic-app-floor.herokuapp.com/";
+            window.location.href = "https://ionic-app.now.sh";
             return null;
           }}
         />

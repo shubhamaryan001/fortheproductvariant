@@ -5,17 +5,34 @@
 .navbar {
   z-index: 3000;
   font-family: "Poppins", sans-serif;
-  font-weight: 600;
+  font-weight: 600 !important;
 }
 
-.navbar .nav-link {
+.navbar ul li .nav-link {
   text-decoration: none;
 
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: none;
   color: black !important;
   letter-spacing: 0.5px;
+}
+
+.navbar ul li {
+  margin-left: 1rem;
+}
+
+.cool-link:after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #fba211;
+  transition: width 0.3s;
+}
+
+.cool-link:hover::after {
+  width: 100%;
 }
 
 .nav-top-bar a {
@@ -32,19 +49,37 @@
   text-decoration: none !important;
 }
 
-#desktopmenu {
-  display: inline;
-}
-#mobileMenu {
-  display: none;
+.btn-login {
+  background-color: white;
+  padding: 10px 2rem 10px 2rem;
+
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 15px;
+  color: rgba(244, 107, 69, 1);
 }
 
-@media screen and (max-width: 990px) {
-  #desktopMenu {
-    display: none !important;
-  }
+.btn-login:hover {
+  background-color: white;
+  color: rgba(244, 107, 69, 1);
+}
 
-  #mobileMenu {
-    display: block;
-  }
+.btn-signup {
+  background-color: #fba211;
+  padding: 10px 2rem 10px 2rem;
+
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 15px;
+  color: white;
+}
+
+.btn-signup:hover {
+  background-color: #fba211;
+  color: white;
+}
+
+.btn-danger {
+  border-radius: 50px;
+  color: white !important;
 }

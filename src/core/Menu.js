@@ -30,14 +30,14 @@ const Menu = ({ history }) => (
       </a>
 
       <ul className="navbar-nav  mr-auto">
-        <li className="nav-item">
+        <li className="nav-item cool-link">
           <Link className="nav-link" style={isActive(history, "/")} to="/">
             Home
           </Link>
         </li>
-        <li className="nav-item">
+        <li className="nav-item ">
           <Link
-            className="nav-link"
+            className="nav-link cool-link"
             style={isActive(history, "/shop")}
             to="/shop"
           >
@@ -46,16 +46,16 @@ const Menu = ({ history }) => (
         </li>
         <li className="nav-item">
           <Link
-            className="nav-link"
+            className="nav-link cool-link"
             style={isActive(history, "/about-us")}
             to="/about-us"
           >
-            About-Us
+            About Us
           </Link>
         </li>
 
         <li className="nav-item">
-          <Link className="nav-link" to="#contact">
+          <Link className="nav-link cool-link" to="#contact">
             Support
           </Link>
         </li>
@@ -64,13 +64,13 @@ const Menu = ({ history }) => (
         <form className="form-inline my-2 my-lg-0">
           <Link
             to="/signin"
-            className="btn btn-raised btn-success my-2 my-sm-0 mr-3 text-uppercase"
+            className="btn btn-raised btn-login  my-2 my-sm-0 mr-3 text-uppercase"
           >
             login
-          </Link>{" "}
+          </Link>
           <Link
             to="/signup"
-            className="btn btn-info btn-raised my-2 my-sm-0 text-uppercase"
+            className="btn btn-signup btn-raised my-2 my-sm-0 text-uppercase"
           >
             sign up
           </Link>
@@ -81,7 +81,7 @@ const Menu = ({ history }) => (
         <ul className="navbar-nav navdrop">
           <li className="nav-item  dropdown">
             <Link
-              className="nav-link btn btn-raised btn-primary dropdown-toggle"
+              className="nav-link btn btn-raised  btn-danger dropdown-toggle"
               to="#"
               id="navbarDropdown"
               role="button"

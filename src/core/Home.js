@@ -12,10 +12,7 @@ import MostSell from "./MostSell";
 const Home = () => {
   return (
     <>
-      <div className="container-fluid p-0 mb-0 ">
-        <MainSection />
-        {/* <Search /> */}
-      </div>
+      <MainSection />
     </>
   );
 };
