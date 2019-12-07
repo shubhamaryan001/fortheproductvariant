@@ -33,36 +33,40 @@ const HomeProduct = () => {
   }, []);
   return (
     <>
-      <div className="container-fluid mt-5 mb-5">
-        <h1 className="text-center gredent-text"> BUY PACKAGE AS PER NEED</h1>
+      <div className="container-fluid section-2 mt-5">
+        <h1 className="text-center gredent-text mt-5">
+          BUY PACKAGE AS PER NEED
+        </h1>
+
         <div className="row">
           <div className="col-md-12">
-            <div
-              className=" card container p-0"
-              style={{
-                minWidth: "80%"
-              }}
-            >
-              <div className="card border-outline">
+            <div className=" card container card-section  p-0">
+              <div className="card second-card">
                 <div className="ribbon-3 ribbon">
-                  <h4 className="text-white font-weight-bold">Best Seller</h4>
+                  <h4 className="text-ribbon">Value For Money</h4>
                 </div>
                 <h2
-                  className="card-header text-muted font-weight-bold text-center"
-                  style={{
-                    background: "#f1f1f1"
-                  }}
+                  className="card-header card-headermain text-muted "
+                  style={{ background: " #f1f1f1" }}
                 >
                   {basic.name}
                 </h2>
                 <div className="row">
                   <div className="col-md-6">
-                    <ReactPlayer
-                      url="https://www.youtube.com/embed/bhpKw3umAxE"
-                      className="react-player"
-                      width="100%"
-                      height="100%"
-                    />
+                    <div
+                      className="card card-three"
+                      style={{ minWidth: "80%", minHeight: "100%" }}
+                    >
+                      <ReactPlayer
+                        url="https://www.youtube.com/embed/bhpKw3umAxE"
+                        className="react-player"
+                        width="100%"
+                        height="400px"
+                        controls
+                        playing
+                        light="https://res.cloudinary.com/djnv06fje/image/upload/v1575724968/maxresdefault_1_vmd2ll.jpg"
+                      />
+                    </div>
                   </div>
                   <div className="col-md-6">
                     <div className="row">
