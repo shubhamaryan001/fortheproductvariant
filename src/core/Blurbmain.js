@@ -7,7 +7,7 @@ export default class Blurbmain extends Component {
   render() {
     return (
       <>
-        <div className="container-fluid p-4">
+        <div className="container-fluid p-4" style={{ background: "#fff" }}>
           <div className="container" style={{ minWidth: "80%" }}>
             <div className="row">
               <div className="col-md-3">
