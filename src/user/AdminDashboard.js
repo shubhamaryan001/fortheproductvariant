@@ -67,7 +67,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="container-fluid standard-height  ">
+    <div className="container-fluid standard-pages  ">
       <div className="row ">
         <div className="col-md-4 col-sm-12 ">{adminInfo()}</div>
         <div className="col-md-4 col-sm-12">

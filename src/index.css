@@ -14,15 +14,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  margin: 100px 0 0 0 !important;
+  margin-top: 100px !important;
+  margin-right: 0 !important;
+  overflow-x: hidden !important;
 }
 
-@media screen and (max-width: 990px) {
+/* @media screen and (max-width: 990px) {
   body {
     margin-top: 0 !important;
     margin-left: 64px !important;
   }
-}
+} */
 .standard-row {
   min-height: 60vh;
   padding-top: 8rem;
@@ -34,6 +36,7 @@ body {
 .standard-pages {
   min-height: 70vh;
   padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .editorClassName {

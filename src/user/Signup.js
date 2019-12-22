@@ -127,7 +127,9 @@ const Signup = () => {
               <FiChevronsDown className="FiChevronsDown" />
               <h3>Join Us</h3>
               <p>
-                Welcome to CodingHeroes BootCamp to get Information about world
+                FloorPlanBazaar has the largest online database of Ready-to-Use
+                Floor Plans. Thousands of homes have been built, remodeled and
+                renovated using plans from FloorPlanBazaar.com
               </p>
               <button type="button" className="btn btn-raised btn-primary">
                 about Us

@@ -7,7 +7,7 @@ import { FaAmazonPay } from "react-icons/fa";
 import { createOrder } from "./apiCore";
 import { emptyCart } from "./cartHelpers";
 import { FiChevronsRight } from "react-icons/fi";
-import { FaCreditCard, FaRegHandPointRight } from "react-icons/fa";
+import { FaCreditCard, FaRegHandPointRight, FaTags } from "react-icons/fa";
 
 import { razorPayOptionsDirt } from "./directpayhelp";
 import { getUserBalance, deductUserWallet } from "../admin/apiAdmin";
@@ -151,7 +151,11 @@ const Checkout = ({ products }) => {
       return isAuthenticated() ? (
         <div>
           <FiChevronsRight className="FiChevronsRight" />
-          <button onClick={walletDeduct} className="btn btn-raised btn-success">
+          <button
+            onClick={walletDeduct}
+            className="btn btn-raised btn-success"
+            style={{ color: "#10dc60" }}
+          >
             Pay using Wallet Money
           </button>
           <br />
@@ -180,6 +184,7 @@ const Checkout = ({ products }) => {
             onClick={walletDeduct}
             className="btn btn-raised btn-success"
             disabled
+            style={{ color: "#10dc60" }}
           >
             Pay using Wallet Money
           </button>
@@ -318,7 +323,7 @@ const Checkout = ({ products }) => {
               className="card-header p-1 "
               style={{ background: "#7044FF", color: "white" }}
             >
-              Price Details
+              Price Details <FaTags style={{ marginBottom: "-3px" }} />
             </h3>
             <div className="card-content">
               {applied ? (
@@ -340,7 +345,7 @@ const Checkout = ({ products }) => {
                 <div className="col-6 text-right">
                   <h5 className="" style={{ color: "#10dc60" }}>
                     <FaRegHandPointRight className="icon-right-thumb" /> First
-                    25% Payment
+                    Payment 25% only
                   </h5>
                 </div>
                 <div className="col-6 text-center">
