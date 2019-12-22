@@ -84,6 +84,7 @@ const Routes = () => {
 
         <Route component={NotFoundPage} />
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 };

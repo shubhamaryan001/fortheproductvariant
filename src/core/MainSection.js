@@ -1,20 +1,17 @@
 import React, { Component } from "react";
-import ReactPlayer from "react-player";
 
-import { FiShoppingBag } from "react-icons/fi";
-import { FaPlay, FaCheckCircle } from "react-icons/fa";
-import { IoMdCloseCircle } from "react-icons/io";
+import { FaPlay } from "react-icons/fa";
 
-import { Animated } from "react-animated-css";
 import Typed from "react-typed";
-import Newly from "./NewlyAdded";
-import "../index.css";
-import { Card, Icon } from "antd";
+
 import "../../node_modules/react-modal-video/scss/modal-video.scss";
 import ModalVideo from "react-modal-video";
 import Slide from "react-reveal/Slide";
+import "../index.css";
+
+import Newly from "./NewlyAdded";
 import HomeProduct from "./HomeProduct";
-const { Meta } = Card;
+import Blurbmain from "./Blurbmain";
 
 export default class MainSection extends Component {
   constructor() {
@@ -33,10 +30,7 @@ export default class MainSection extends Component {
       <>
         <div className="container-fluid main-page p-0">
           <div className="container" style={{ minWidth: "80%" }}>
-            <div
-              className="row"
-              style={{ minHeight: "60vh", padding: "8rem 0 0 0" }}
-            >
+            <div className="row standard-row">
               <div className="col-md-6 ">
                 <Slide duration={1500} left>
                   <div
@@ -125,6 +119,8 @@ export default class MainSection extends Component {
 
         {/* ---------------------------------Sections------------------------------------ */}
 
+        <Newly />
+        <Blurbmain />
         <HomeProduct />
       </>
     );

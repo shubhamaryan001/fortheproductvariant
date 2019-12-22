@@ -4,8 +4,14 @@ import { emptyCart } from "./cartHelpers";
 import { isAuthenticated } from "../auth";
 import React from "react";
 import { Redirect } from "react-router-dom";
-export const razorPayOptionsDirt = (amount, user, products, anyNote) => {
-  const { name, email } = user;
+export const razorPayOptionsDirt = (
+  amount,
+  user,
+  products,
+  anyNote,
+  SecondAmount
+) => {
+  const { name, email, mobile } = user;
   const userId = isAuthenticated() && isAuthenticated().user._id;
   const token = isAuthenticated() && isAuthenticated().token;
 
@@ -16,7 +22,7 @@ export const razorPayOptionsDirt = (amount, user, products, anyNote) => {
     name: "E-comm",
     description: "An e-commerce for developers",
     image:
-      "https://img.etimg.com/thumb/height-450,width-800,msid-63110702,imgsize-12508/razorpay.jpg",
+      "https://res.cloudinary.com/djnv06fje/image/upload/v1574864028/1_bsry6v.png",
     // order_id: 'order_9A33XWu170gUtm',
     handler: function(response) {
       let transactionId = response.razorpay_payment_id;
@@ -37,7 +43,10 @@ export const razorPayOptionsDirt = (amount, user, products, anyNote) => {
           transaction_id: transactionId,
           amount: amount,
           payment_mode: "Direct Payment Gateway",
-          note: anyNote
+          note: anyNote,
+          firstpayment: true,
+          firstpaymentamount: amount,
+          secondpaymentamount: SecondAmount
         };
 
         console.log(transactionId);
@@ -54,13 +63,13 @@ export const razorPayOptionsDirt = (amount, user, products, anyNote) => {
     prefill: {
       name: name || "name",
       email: email || "example@example.com",
-      contact: ""
+      contact: mobile || ""
     },
     notes: {
       address: "Address"
     },
     theme: {
-      color: "#F37254"
+      color: "#ffce00"
     }
   };
 };

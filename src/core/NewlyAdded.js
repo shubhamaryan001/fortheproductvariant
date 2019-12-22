@@ -6,7 +6,8 @@ import ShowImage from "./ShowImage";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "../index.css";
-
+import { API } from "../config";
+import Slide from "react-reveal/Slide";
 const NewlyAdded = () => {
   const [productsByArrival, setProductsByArrival] = useState([]);
   const [error, setError] = useState(false);
@@ -21,7 +22,7 @@ const NewlyAdded = () => {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 4
+      items: 3
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -32,7 +33,6 @@ const NewlyAdded = () => {
       items: 1
     }
   };
-
   const loadProductsByArrival = () => {
     getProducts("createdAt").then(data => {
       setValues({ loading: true });
@@ -44,10 +44,7 @@ const NewlyAdded = () => {
         });
       } else {
         setProductsByArrival(data);
-
-        setValues({
-          loading: false
-        });
+        console.log(data);
       }
     });
   };
@@ -56,39 +53,80 @@ const NewlyAdded = () => {
     loadProductsByArrival();
   }, []);
 
-  const showLoading = () =>
-    loading && (
-      <div className="loading-screen">
-        <div class="loader">
-          <h3 className="Loading mt-5">PLEASE WAIT ..</h3>
-        </div>
-
-        <div className="Back-1"></div>
-      </div>
-    );
   return (
     <>
-      <div className="container-fluid  products-by-arrival pl-5 pr-5 ">
+      <div
+        className="container-fluid  pb-5"
+        style={{ minHeight: "60vh", background: "#F7F7F7" }}
+      >
+        <h2 className="text-center gredent-text">Trending Services</h2>
         <div className="row">
-          <h2 className="products-Heading text-uppercase mb-4">New Arrivals</h2>
-          <div className="col-12">
-            <Carousel
-              swipeable={true}
-              draggable={false}
-              infinite={true}
-              ssr={true}
-              autoPlay={true}
-              autoPlaySpeed={2000}
-              responsive={responsive}
-            >
-              {showLoading()}
-              {productsByArrival.map((product, i) => (
-                <div key={i}>
-                  <Card product={product} />
-                </div>
-              ))}
-            </Carousel>
-          </div>
+          <Slide duration={2500} left>
+            <div className="col-md-10  pr-5 slide-trend">
+              <Slide duration={2500} delay={2000} left>
+                <div className="slide-trend-2"></div>
+              </Slide>
+
+              <Carousel
+                swipeable={false}
+                draggable={false}
+                ssr={true}
+                infinite={true}
+                autoPlay={true}
+                transitionDuration={1000}
+                autoPlaySpeed={1000}
+                responsive={responsive}
+              >
+                {productsByArrival &&
+                  productsByArrival.length > 0 &&
+                  productsByArrival.map((p, i) => {
+                    return (
+                      <div
+                        key={i}
+                        className="card"
+                        style={{
+                          maxWidth: "25rem",
+                          maxHeight: "450px",
+                          minHeight: "450px"
+                        }}
+                      >
+                        <h4 className="card-header text-center text-uppercase">
+                          {p.name}
+                        </h4>
+                        <img
+                          className="img-top"
+                          src={`${API}//product/photo/${p._id}`}
+                          style={{ maxWidth: "100%", height: "225px" }}
+                        />
+
+                        <div className="p-3">
+                          <p className="card-text">
+                            {p.short_description.substring(0, 180)}
+                          </p>
+
+                          <div className="row">
+                            <div className="col-md-4">
+                              <h4>₹{p.price}</h4>
+                            </div>
+                            <div className="col-md-4"></div>
+                            <div className="col-md-4">
+                              <Link
+                                className="btn btn-raised btn-info"
+                                to={`/product/${p._id}`}
+                              >
+                                See Details
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </Carousel>
+            </div>
+          </Slide>
+
+          <div className="col-md-2"></div>
         </div>
       </div>
     </>

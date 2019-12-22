@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
 import { signin, authenticate, isAuthenticated } from "../auth";
-import "../index.css";
+import "./Users.css";
 import { FiChevronsDown } from "react-icons/fi";
 
 const Signin = () => {
@@ -73,8 +73,8 @@ const Signin = () => {
   };
 
   return (
-    <div className="container-fluid standard-height  ">
-      <div className="row ">
+    <div className="container-fluid">
+      <div className="row standard-row">
         <div className=" col-md-10  offset=md-1">
           <div className="row signup-body">
             <div className="col-md-5  register-left">

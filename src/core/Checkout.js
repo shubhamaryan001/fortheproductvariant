@@ -7,16 +7,20 @@ import { FaAmazonPay } from "react-icons/fa";
 import { createOrder } from "./apiCore";
 import { emptyCart } from "./cartHelpers";
 import { FiChevronsRight } from "react-icons/fi";
-import { FaCreditCard } from "react-icons/fa";
+import { FaCreditCard, FaRegHandPointRight } from "react-icons/fa";
 
 import { razorPayOptionsDirt } from "./directpayhelp";
 import { getUserBalance, deductUserWallet } from "../admin/apiAdmin";
+
+import "../index.css";
 let { user } = isAuthenticated();
 
 const Razorpay = window.Razorpay;
 
 const productTax = 50;
 const Checkout = ({ products }) => {
+  const [disabledbtn, setDisabledbtn] = useState(false);
+
   const [values, setValues] = useState({
     code: "",
     discount: 0,
@@ -138,31 +142,66 @@ const Checkout = ({ products }) => {
   let amount = applied
     ? getTotal() + productTax - discount
     : getTotal() + productTax;
+
+  let FirstAmount = (25 / 100) * amount;
+  let SecondAmount = (75 / 100) * amount;
+
   const walletCheckout = () => {
-    return isAuthenticated() ? (
-      <div>
-        <FiChevronsRight className="FiChevronsRight" />
-        <button onClick={walletDeduct} className="btn btn-raised btn-success">
-          Pay using Wallet Money
-        </button>
-        <br />
-        <span className="text-center">
-          <p>
-            Wallet balance Rs.{" "}
-            <b>
-              {currentWalletBalance ? `Rs. ${currentWalletBalance}` : "Rs. 0"}
-            </b>
-          </p>
-        </span>
-      </div>
-    ) : (
-      // <button className="btn btn-raised btn-success">Pay Now</button>
-      <Link to="/signin">
-        <button className="btn btn-raised btn-warning">
-          Sign in to checkout
-        </button>
-      </Link>
-    );
+    if (disabledbtn === true) {
+      return isAuthenticated() ? (
+        <div>
+          <FiChevronsRight className="FiChevronsRight" />
+          <button onClick={walletDeduct} className="btn btn-raised btn-success">
+            Pay using Wallet Money
+          </button>
+          <br />
+          <span className="text-center">
+            <p>
+              Wallet balance Rs.{" "}
+              <b>
+                {currentWalletBalance ? `Rs. ${currentWalletBalance}` : "Rs. 0"}
+              </b>
+            </p>
+          </span>
+        </div>
+      ) : (
+        // <button className="btn btn-raised btn-success">Pay Now</button>
+        <Link to="/signin">
+          <button className="btn btn-raised btn-warning">
+            Sign in to checkout
+          </button>
+        </Link>
+      );
+    } else if (disabledbtn === false) {
+      return isAuthenticated() ? (
+        <div>
+          <FiChevronsRight className="FiChevronsRight" />
+          <button
+            onClick={walletDeduct}
+            className="btn btn-raised btn-success"
+            disabled
+          >
+            Pay using Wallet Money
+          </button>
+          <br />
+          <span className="text-center">
+            <p>
+              Wallet balance Rs.{" "}
+              <b>
+                {currentWalletBalance ? `Rs. ${currentWalletBalance}` : "Rs. 0"}
+              </b>
+            </p>
+          </span>
+        </div>
+      ) : (
+        // <button className="btn btn-raised btn-success">Pay Now</button>
+        <Link to="/signin">
+          <button className="btn btn-raised btn-warning">
+            Sign in to checkout
+          </button>
+        </Link>
+      );
+    }
   };
 
   const getfilter = products.filter(
@@ -177,44 +216,87 @@ const Checkout = ({ products }) => {
     }
   };
 
+  const handleCheck = event => {
+    if (event.target.checked) {
+      setDisabledbtn(true);
+    } else {
+      setDisabledbtn(false);
+    }
+  };
   const showCheckout = () => {
-    return isAuthenticated() ? (
-      <div>
-        {console.log(products)}
-        <FiChevronsRight className="FiChevronsRight" />
+    if (disabledbtn === true) {
+      return isAuthenticated() ? (
+        <div>
+          {console.log(products)}
+          <FiChevronsRight className="FiChevronsRight" />
 
-        <button
-          onClick={openRzrPay}
-          className="btn btn-raised btn-success"
-          id="rzp-button1"
-        >
-          Pay Now Using Razorpay
-        </button>
-        {currentWalletBalance >
-        (applied ? getTotal() + productTax - discount : getTotal() + productTax)
-          ? walletCheckout()
-          : ""}
-      </div>
-    ) : (
-      // <button className="btn btn-raised btn-success">Pay Now</button>
-      <Link to="/signin">
-        <button className="btn btn-raised btn-warning">
-          Sign in to checkout
-        </button>
-      </Link>
-    );
+          <button
+            onClick={openRzrPay}
+            className="btn btn-raised btn-success"
+            id="rzp-button1"
+            style={{ background: "#10dc60" }}
+          >
+            Pay Now (₹ {FirstAmount})
+          </button>
+          {currentWalletBalance >
+          (applied
+            ? getTotal() + productTax - discount
+            : getTotal() + productTax)
+            ? walletCheckout()
+            : ""}
+        </div>
+      ) : (
+        // <button className="btn btn-raised btn-success">Pay Now</button>
+        <Link to="/signin">
+          <button className="btn btn-raised btn-warning">
+            Sign in to checkout
+          </button>
+        </Link>
+      );
+    } else if (disabledbtn === false) {
+      return isAuthenticated() ? (
+        <div>
+          {console.log(products)}
+          <FiChevronsRight className="FiChevronsRight" />
+
+          <button
+            onClick={openRzrPay}
+            className="btn btn-raised btn-success"
+            id="rzp-button1"
+            style={{ background: "#10dc60" }}
+            disabled
+          >
+            Pay Now (₹ {FirstAmount})
+          </button>
+          {currentWalletBalance >
+          (applied
+            ? getTotal() + productTax - discount
+            : getTotal() + productTax)
+            ? walletCheckout()
+            : ""}
+        </div>
+      ) : (
+        // <button className="btn btn-raised btn-success">Pay Now</button>
+        <Link to="/signin">
+          <button className="btn btn-raised btn-warning">
+            Sign in to checkout
+          </button>
+        </Link>
+      );
+    }
   };
 
   let anyNote = data.note;
   // Razorpay
   const rzp1 = new Razorpay(
     razorPayOptionsDirt(
-      applied ? getTotal() + productTax - discount : getTotal() + productTax,
+      FirstAmount,
       user && user.name && user.email
         ? { ...user, token }
-        : { name: "", email: "" },
+        : { name: "", email: "", mobile: "" },
       products,
-      anyNote
+      anyNote,
+      SecondAmount
     )
   );
   const openRzrPay = event => {
@@ -223,99 +305,236 @@ const Checkout = ({ products }) => {
   };
 
   return (
-    <div className="container-fluid">
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <p>
-                {showFilter()}
-                <a
-                  className="btn btn-raised"
-                  data-toggle="collapse"
-                  href="#collapseExample"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="collapseExample"
-                >
-                  Total Payable Amount: ₹{amount}
-                  <FaAmazonPay className="FaAmazonPay" />
-                </a>
-              </p>
+    <div className="container text-center" style={{ maxWidth: "80%" }}>
+      {/* <div className="text-center">
+        <h2 className="mb-1 ">Your cart summary</h2>
+        <hr />
+      </div> */}
 
-              <div className="collapse" id="collapseExample">
-                <div className="card card-body">
-                  <tr>
-                    <td>
-                      <b>Price Summary</b>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className="form-group">
-                        <label className="text-muted">Apply Coupon</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          onChange={handleChange("code")}
-                          value={code}
-                          autoFocus
-                          required
-                        />
-                      </div>
-                      <button
-                        onClick={applyCode}
-                        className="btn btn-success active"
-                      >
-                        Apply Coupon
-                      </button>{" "}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <b>
-                        {invalidCode
-                          ? "Invalid Coupon!"
-                          : applied
-                          ? `code applied successfully`
-                          : ""}{" "}
-                      </b>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Total Product Price- </td>
-                    <td>₹{getTotal()}</td>
-                  </tr>
-                  <tr>
-                    <td> GST: </td>
-                    <td>₹{productTax} </td>
-                  </tr>
-                  <tr>
-                    <td> Discount: </td>
-                    <td>₹{discount} </td>
-                  </tr>
-                  <tr>
-                    <td> Total Amount= ₹ </td>
-                    <td>{amount}</td>
-                  </tr>
+      <div className="row">
+        <div className="col-md-12">
+          <div className="card">
+            <h3
+              className="card-header p-1 "
+              style={{ background: "#7044FF", color: "white" }}
+            >
+              Price Details
+            </h3>
+            <div className="card-content">
+              {applied ? (
+                <>
+                  <h5>
+                    Complete Project Price <strike>₹{amount + discount}</strike>
+                    <span style={{ marginLeft: "4px", color: "#10dc60" }}>
+                      ₹{amount}
+                    </span>
+                  </h5>
+                </>
+              ) : (
+                <>
+                  <h4>Complete Project Price ₹{amount}</h4>
+                </>
+              )}
+
+              <div className="row">
+                <div className="col-6 text-right">
+                  <h5 className="" style={{ color: "#10dc60" }}>
+                    <FaRegHandPointRight className="icon-right-thumb" /> First
+                    25% Payment
+                  </h5>
+                </div>
+                <div className="col-6 text-center">
+                  <h6 style={{ color: "#10dc60" }}>
+                    <b>₹{FirstAmount}</b>
+                  </h6>
                 </div>
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div className="gorm-group mb-3">
-        <label className="text-muted">Any Note:</label>
-        <textarea
-          onChange={handleNote}
-          className="form-control"
-          value={data.note}
-          placeholder="Type any Note ......"
-        />
+              <div className="row">
+                <div className="col-6 text-right">
+                  <h5>Second Payment Remaining 75% </h5>
+                </div>
+                <div className="col-6 text-center">
+                  <h6>
+                    <b>₹{SecondAmount}</b>
+                  </h6>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-6 text-right">
+                  <h5 className="text-muted">GST</h5>
+                </div>
+                <div className="col-6 text-center">
+                  <h6 className="text-muted">
+                    <b>₹{productTax}</b>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div className="row code">
+              <div className="col-6  ">
+                <div className="p-2 text-center">
+                  <b>
+                    {invalidCode
+                      ? "Invalid Coupon!"
+                      : applied
+                      ? `code applied successfully`
+                      : ""}{" "}
+                  </b>
+                  <form class="form">
+                    <input
+                      placeholder="Apply Coupon"
+                      type="text"
+                      className="form__field"
+                      onChange={handleChange("code")}
+                      value={code}
+                      autoFocus
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={applyCode}
+                      class="btn btn--primary btn--inside uppercase"
+                    >
+                      Apply
+                    </button>
+                  </form>
+                </div>
+
+                <div className="row">
+                  <div className="col-12">
+                    <div className="text-center">
+                      <div className="form-group p-0">
+                        <textarea
+                          rows="4"
+                          onChange={handleNote}
+                          className="form-control-checkout"
+                          value={data.note}
+                          placeholder="Type any Note ......"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-6 pt-5">
+                <div className="form-group">
+                  <label className="input-group">
+                    <input
+                      style={{ margin: "2.2px 2px 0 0" }}
+                      type="checkbox"
+                      onChange={handleCheck}
+                    />
+                    <p>
+                      I Agree To The
+                      <Link className="ml-1" to="/termsandcondition">
+                        FloorPlanBazaar Services Agreement.
+                      </Link>
+                    </p>
+                  </label>
+                </div>
+
+                {showCheckout()}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      {redirectUser()}
-      {showCheckout()}
     </div>
+
+    // <div className="container-fluid">
+    //   <table>
+    //     <tbody>
+    //       <tr>
+    //         <td>
+    //           <p>
+    //             {showFilter()}
+    //             <a
+    //               className="btn btn-raised"
+    //               data-toggle="collapse"
+    //               href="#collapseExample"
+    //               role="button"
+    //               aria-expanded="false"
+    //               aria-controls="collapseExample"
+    //             >
+    //               Total Payable Amount: ₹{amount}
+    //               <FaAmazonPay className="FaAmazonPay" />
+    //             </a>
+    //           </p>
+
+    //           <div className="collapse" id="collapseExample">
+    //             <div className="card card-body">
+    //               <tr>
+    //                 <td>
+    //                   <b>Price Summary</b>
+    //                 </td>
+    //               </tr>
+    //               <tr>
+    //                 <td>
+    //                   <div className="form-group">
+    //                     <label className="text-muted">Apply Coupon</label>
+    //                     <input
+    //                       type="text"
+    //                       className="form-control"
+    //                       onChange={handleChange("code")}
+    //                       value={code}
+    //                       autoFocus
+    //                       required
+    //                     />
+    //                   </div>
+    //                   <button
+    //                     onClick={applyCode}
+    //                     className="btn btn-success active"
+    //                   >
+    //                     Apply Coupon
+    //                   </button>{" "}
+    //                 </td>
+    //               </tr>
+    //               <tr>
+    //                 <td>
+    //                   <b>
+    //                     {invalidCode
+    //                       ? "Invalid Coupon!"
+    //                       : applied
+    //                       ? `code applied successfully`
+    //                       : ""}{" "}
+    //                   </b>
+    //                 </td>
+    //               </tr>
+    //               <tr>
+    //                 <td>Total Product Price- </td>
+    //                 <td>₹{getTotal()}</td>
+    //               </tr>
+    //               <tr>
+    //                 <td> GST: </td>
+    //                 <td>₹{productTax} </td>
+    //               </tr>
+    //               <tr>
+    //                 <td> Discount: </td>
+    //                 <td>₹{discount} </td>
+    //               </tr>
+    //               <tr>
+    //                 <td> Total Amount= ₹ </td>
+    //                 <td>{amount}</td>
+    //               </tr>
+    //             </div>
+    //           </div>
+    //         </td>
+    //       </tr>
+    //     </tbody>
+    //   </table>
+    //   <div className="gorm-group mb-3">
+    //     <label className="text-muted">Any Note:</label>
+    //     <textarea
+    //       onChange={handleNote}
+    //       className="form-control"
+    //       value={data.note}
+    //       placeholder="Type any Note ......"
+    //     />
+    //   </div>
+    //   {redirectUser()}
+    //   {showCheckout()}
+    // </div>
   );
 };
 

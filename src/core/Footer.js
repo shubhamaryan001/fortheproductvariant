@@ -3,112 +3,204 @@ import { Link, withRouter } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth/index";
 import { itemTotal } from "./cartHelpers";
 import "../index.css";
-import { FaUserCircle } from "react-icons/fa";
+import {
+  FaUserCircle,
+  FaAngleDoubleRight,
+  FaFacebookSquare,
+  FaTwitterSquare,
+  FaInstagram,
+  FaYoutubeSquare,
+  FaAngleDoubleLeft
+} from "react-icons/fa";
+import { TiSocialInstagram } from "react-icons/ti";
 
 const Footer = () => (
-  <footer id="footer" class="footer-1">
-    <div class="main-footer widgets-dark typo-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <div class="widget subscribe no-box">
-              <h5 class="widget-title">
-                COMPANY NAME<span></span>
-              </h5>
-              <p>About the company, little discription will goes here.. </p>
-            </div>
+  <section className="container-fluid " id="footer">
+    <div class="container  " style={{ minWidth: "80%" }}>
+      <div class="row text-center  text-md-center">
+        <div className="col-md-3">
+          <div
+            className="card bg-transparent text-left"
+            style={{ boxShadow: "none" }}
+          >
+            <p className=" text-white">
+              FloorPlanBazaar has the largest online database of Ready-to-Use
+              Floor Plans. Thousands of homes have been built, remodeled and
+              renovated using plans from FloorPlanBazaar.com
+            </p>
+            <img
+              src="https://res.cloudinary.com/djnv06fje/image/upload/v1574864028/Copy_of_A1_i6w3xi.png"
+              style={{ width: "250px", height: "125px" }}
+            />
           </div>
+        </div>
 
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <div class="widget no-box">
-              <h5 class="widget-title">
-                Quick Links<span></span>
-              </h5>
-              <ul class="thumbnail-widget">
-                <li>
-                  <div class="thumb-content">
-                    <a href="#.">Get Started</a>
-                  </div>
-                </li>
-                <li>
-                  <div class="thumb-content">
-                    <a href="#.">Top Leaders</a>
-                  </div>
-                </li>
-                <li>
-                  <div class="thumb-content">
-                    <a href="#.">Success Stories</a>
-                  </div>
-                </li>
-                <li>
-                  <div class="thumb-content">
-                    <a href="#.">Event/Tickets</a>
-                  </div>
-                </li>
-                <li>
-                  <div class="thumb-content">
-                    <a href="#.">News</a>
-                  </div>
-                </li>
-                <li>
-                  <div class="thumb-content">
-                    <a href="#.">Lifestyle</a>
-                  </div>
-                </li>
-                <li>
-                  <div class="thumb-content">
-                    <a href="#.">About</a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <div class="widget no-box">
-              <h5 class="widget-title">
-                Get Started<span></span>
-              </h5>
-              <p>Get access to your full Training and Marketing Suite.</p>
-              <Link class="btn button-footer" to="/signin">
-                Register Now
-              </Link>
-            </div>
-          </div>
-
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <div class="widget no-box">
-              <h5 class="widget-title">
-                Contact Us<span></span>
-              </h5>
-
-              <p>
-                <a href="mailto:info@domain.com" title="glorythemes">
-                  info@domain.com
+        <div class=" col-md-3">
+          <div
+            className="card bg-transparent text-center"
+            style={{ boxShadow: "none" }}
+          >
+            <h5>PRODUCTS</h5>
+            <ul class="list-unstyled quick-links">
+              <li>
+                <a href="#">
+                  <FaAngleDoubleRight className="i" />
+                  Floor Planning
                 </a>
-              </p>
-              <ul class="social-footer2">
-                <li class=""></li>
-                <li class=""></li>
-                <li class=""></li>
-                <li class=""></li>
-              </ul>
+              </li>
+              <li>
+                <a href="#">
+                  <FaAngleDoubleRight className="i" />
+                  3D Front Elevation
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FaAngleDoubleRight className="i" />
+                  3D Floor Plans
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FaAngleDoubleRight className="i" />
+                  3D Interior Views
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FaAngleDoubleRight className="i" />
+                  3D Video Walkthru
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class=" col-md-3">
+          <div
+            className="card bg-transparent text-center"
+            style={{ boxShadow: "none" }}
+          >
+            <h5>PACKAGES</h5>
+            <ul class="list-unstyled quick-links">
+              <li>
+                <a href="#">
+                  <FaAngleDoubleRight className="i" />
+                  LUXURY House Design Package
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FaAngleDoubleRight className="i" />
+                  PREMIUM House Design Package
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FaAngleDoubleRight className="i" />
+                  MODERN House Design Package
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FaAngleDoubleRight className="i" />
+                  BASIC House Design Package
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <FaAngleDoubleRight className="i" />
+                  Structure Drawings Package
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class=" col-md-3">
+          <div
+            className="card bg-transparent text-center"
+            style={{ boxShadow: "none" }}
+          >
+            <div class="row ">
+              <div class="  col-md-12  text-center">
+                <ul class="list-unstyled list-inline social ">
+                  <li class="list-inline-item">
+                    <a
+                      href="https://www.facebook.com/floorplanbazaar/"
+                      target="_blank"
+                    >
+                      <FaFacebookSquare className="i" />
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#" target="_blank">
+                      <FaTwitterSquare className="i" />
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a
+                      href="https://www.facebook.com/floorplanbazaar/"
+                      target="_blank"
+                    >
+                      <TiSocialInstagram className="i" />
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a
+                      href="https://www.youtube.com/channel/UCgSvEsQxUJpx6bIswJHcQ5w?view_as=subscriber"
+                      target="_blank"
+                    >
+                      <FaYoutubeSquare className="i" />
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <hr />
+            </div>
+
+            <div className="row">
+              <div className="col-md-12">
+                <ul class="list-unstyled quick-links">
+                  <li>
+                    <a href="#">
+                      About Us <FaAngleDoubleLeft className="k" />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      Gallery
+                      <FaAngleDoubleLeft className="k" />{" "}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      Career
+                      <FaAngleDoubleLeft className="k" />{" "}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      Support
+                      <FaAngleDoubleLeft className="k" />{" "}
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="footer-copyright">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <p>Copyright Company Name © 2016. All rights reserved.</p>
-          </div>
+    <div className="container-fluid p-2" style={{ background: "#1F1F1F" }}>
+      <div class="row">
+        <div class=" col-md-12 mt-2  text-center text-white">
+          <p class="h6">
+            Copyright © 2020 All Rights Reserved by Floorplan Bazaar Pvt. Ltd.
+          </p>
         </div>
+        <hr></hr>
       </div>
     </div>
-  </footer>
+  </section>
 );
 
 export default withRouter(Footer);
