@@ -174,8 +174,8 @@ const Dashboard = () => {
                             </div>
                           </div>
                           <div className="col-6">
-                            <div className="p-2">
-                              <h5>{p.name}</h5>
+                            <div className="pt-4 ">
+                              <h5 className=" text-muted">{p.name}</h5>
                             </div>
 
                             <div className="p-2">
