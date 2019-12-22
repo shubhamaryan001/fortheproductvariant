@@ -8,7 +8,7 @@ import { getOrdersHistory } from "./apiUser";
 import moment from "moment";
 import { API } from "../config";
 
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaShoppingCart } from "react-icons/fa";
 
 const Razorpay = window.Razorpay;
 const Dashboard = () => {
@@ -86,11 +86,39 @@ const Dashboard = () => {
     return (
       <div className="card profile-card">
         <div className="card-header p-2">
-          {order.length > 0 ? (
-            <h4> Recent Orders ( {order.length})</h4>
-          ) : (
-            <h4> Recent Orders ( No Orders)</h4>
-          )}
+          <div className="row">
+            <div className="col-6">
+              <div className="pt-2">
+                {order.length > 0 ? (
+                  <h4> Recent Orders ( {order.length})</h4>
+                ) : (
+                  <h4> No Orders</h4>
+                )}
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="pt-2 text-right">
+                <Link
+                  className="btn "
+                  to="/cart"
+                  style={{
+                    background: "#10DC60",
+                    color: "#fff",
+                    borderRadius: "50px"
+                  }}
+                >
+                  <b>Cart</b>
+                  <FaShoppingCart
+                    style={{
+                      fontSize: "16px",
+                      color: "#fff",
+                      margin: "0 0 -2px 2px"
+                    }}
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="">
