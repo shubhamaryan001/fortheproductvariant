@@ -44,7 +44,6 @@ const MyOrders = () => {
     </div>
   );
 
-  
   const sort = order.sort(function(a, b) {
     if (a.createdAt < b.createdAt) return 1;
 
@@ -74,7 +73,7 @@ const MyOrders = () => {
   };
 
   return (
-    <div className="container-fluid standard-height">
+    <div className="container-fluid standard-pages">
       <h2> {showOrdersLength()}</h2>
       <div className="row">
         {order.map((o, oIndex) => {

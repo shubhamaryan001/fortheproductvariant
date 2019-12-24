@@ -124,7 +124,7 @@ const DetailOrder = props => {
   };
 
   return (
-    <div className="container-fluid" style={{ minHeight: "80vh" }}>
+    <div className="container-fluid standard-pages">
       {redirectUser()}
       <div className="row">
         <div className="col-4">

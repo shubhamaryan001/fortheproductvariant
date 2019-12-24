@@ -431,9 +431,9 @@ const Checkout = ({ products }) => {
                       onChange={handleCheck}
                     />
                     <p>
-                      I Agree To The
+                      I have read and agree to the
                       <Link className="ml-1" to="/termsandcondition">
-                        FloorPlanBazaar Services Agreement.
+                        FloorPlanBazaar terms and conditions *
                       </Link>
                     </p>
                   </label>
