@@ -13,7 +13,6 @@ const NewlyAdded = () => {
   const [error, setError] = useState(false);
 
   const [values, setValues] = useState({});
-  const { loading } = values;
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.

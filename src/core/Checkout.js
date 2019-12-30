@@ -349,9 +349,7 @@ const Checkout = ({ products }) => {
                   </h5>
                 </div>
                 <div className="col-6 text-center">
-                  <h6 style={{ color: "#10dc60" }}>
-                    <b>₹{FirstAmount}</b>
-                  </h6>
+                  <h6 style={{ color: "#10dc60" }}>₹{FirstAmount}</h6>
                 </div>
               </div>
               <div className="row">

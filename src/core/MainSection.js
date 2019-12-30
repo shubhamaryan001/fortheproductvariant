@@ -104,7 +104,7 @@ export default class MainSection extends Component {
                     </p>
                   </div>
                   <p>
-                    WE'LL GET YOUR PROJECT DONE One stop solution for all your
+                    We'll get your project done One stop solution for all your
                     needs.
                   </p>
                 </Slide>
