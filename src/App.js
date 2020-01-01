@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div>
         {this.props.isMobile ? (
-          <MobileRoutes />
+          <Routes />
         ) : (
           <>
             <Routes />
