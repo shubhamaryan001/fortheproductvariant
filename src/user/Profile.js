@@ -12,6 +12,7 @@ class Profile extends Component {
       name: "",
       email: "",
       password: "",
+      mobile: "",
       role: "",
       wallet_balance: "",
       redirectToProfile: false,
@@ -32,6 +33,7 @@ class Profile extends Component {
           id: data._id,
           name: data.name,
           email: data.email,
+          mobile: data.mobile,
           role: data.role,
           wallet_balance: data.wallet_balance,
           error: "",
@@ -49,7 +51,7 @@ class Profile extends Component {
   }
 
   isValid = () => {
-    const { name, email, password, fileSize } = this.state;
+    const { name, email, mobile, password, fileSize } = this.state;
     if (fileSize > 1000000) {
       this.setState({
         error: "File size should be less than 100kb",
@@ -114,7 +116,7 @@ class Profile extends Component {
     }
   };
 
-  signupForm = (name, email, password, about, role, wallet_balance) => (
+  signupForm = (name, email, mobile, password, about, role, wallet_balance) => (
     <form>
       <div className="form-group">
         <label className="text-muted">Profile Photo</label>
@@ -141,6 +143,16 @@ class Profile extends Component {
           type="email"
           className="form-control"
           value={email}
+        />
+      </div>
+
+      <div className="form-group">
+        <label className="text-muted">Mobile</label>
+        <input
+          onChange={this.handleChange("mobile")}
+          type="tel"
+          className="form-control"
+          value={mobile}
         />
       </div>
 
@@ -195,6 +207,7 @@ class Profile extends Component {
       name,
       email,
       password,
+      mobile,
       redirectToProfile,
       error,
       loading,
@@ -237,10 +250,10 @@ class Profile extends Component {
         />
 
         {isAuthenticated().user.role === "admin" &&
-          this.signupForm(name, email, password, about)}
+          this.signupForm(name, email, mobile, password, about)}
 
         {isAuthenticated().user._id === id &&
-          this.signupForm(name, email, password, about)}
+          this.signupForm(name, email, mobile, password, about)}
       </div>
     );
   }

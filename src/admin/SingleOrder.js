@@ -27,6 +27,8 @@ const SingleOrder = props => {
   const [values, setValues] = useState({
     fileLink: "",
     doc: "",
+    assignedName: "",
+    assignedNumber: "",
     loading: false,
     errorFile: false,
     formData: ""
@@ -40,7 +42,13 @@ const SingleOrder = props => {
 
   const { user, token } = isAuthenticated();
 
-  const { fileLink, errorFile, formData } = values;
+  const {
+    fileLink,
+    assignedName,
+    assignedNumber,
+    errorFile,
+    formData
+  } = values;
 
   const loadSingleOrder = orderId => {
     getSingleOrder(orderId, user._id, token).then(data => {
@@ -53,6 +61,8 @@ const SingleOrder = props => {
         setValues({
           ...values,
           fileLink: data.fileLink,
+          assignedName: data.assignedName,
+          assignedNumber: data.assignedNumber,
           formData: new FormData()
         });
       }
@@ -197,7 +207,8 @@ const SingleOrder = props => {
           ...values,
           fileLink: "",
           doc: "",
-
+          assignedName: "",
+          assignedNumber: "",
           loading: false,
           errorFile: false
         });
@@ -486,6 +497,30 @@ const SingleOrder = props => {
                       type="text"
                       className="form-control"
                       value={fileLink}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="text-muted font-weight-bold">
+                      Assigned Name
+                    </label>
+                    <input
+                      onChange={handleChange("assignedName")}
+                      type="text"
+                      className="form-control"
+                      value={assignedName}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="text-muted font-weight-bold">
+                      Assigned Number
+                    </label>
+                    <input
+                      onChange={handleChange("assignedNumber")}
+                      type="text"
+                      className="form-control"
+                      value={assignedNumber}
                     />
                   </div>
 
