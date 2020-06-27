@@ -449,7 +449,7 @@ const SingleOrder = (props) => {
               <div className="col-6">
                 <ul className="list-group">
                   <li className="list-group-item">
-                    {order.placed_order === true ? (
+                    {order.order_confirmed === true ? (
                       <Alert
                         message="Orderplaced Confirmed"
                         type="success"
@@ -461,9 +461,9 @@ const SingleOrder = (props) => {
                   </li>
 
                   <li className="list-group-item ">
-                    {order.processing === true ? (
+                    {order.engineer_assignment === true ? (
                       <Alert
-                        message="Under Processing"
+                        message="engineer_assignment"
                         type="success"
                         showIcon
                       />
@@ -473,9 +473,9 @@ const SingleOrder = (props) => {
                   </li>
 
                   <li className="list-group-item">
-                    {order.underconstruction === true ? (
+                    {order.floorplan_ready === true ? (
                       <Alert
-                        message="Under Construction"
+                        message="floorplan_ready"
                         type="success"
                         showIcon
                       />
@@ -488,14 +488,22 @@ const SingleOrder = (props) => {
                     )}
                   </li>
                   <li className="list-group-item">
-                    {order.ready === true ? (
-                      <Alert message="Ready" type="success" showIcon />
+                    {order.secondphase === true ? (
+                      <Alert message="secondphase" type="success" showIcon />
                     ) : (
                       <Alert message="Not yet Ready" type="info" showIcon />
                     )}
                   </li>
                   <li className="list-group-item">
-                    {order.finished === true ? (
+                    {order.finalphase === true ? (
+                      <Alert message="final phase" type="success" showIcon />
+                    ) : (
+                      <Alert message="Not yet Finished" type="info" showIcon />
+                    )}
+                  </li>
+
+                  <li className="list-group-item">
+                    {order.complete_work === true ? (
                       <Alert message="Finished" type="success" showIcon />
                     ) : (
                       <Alert message="Not yet Finished" type="info" showIcon />
