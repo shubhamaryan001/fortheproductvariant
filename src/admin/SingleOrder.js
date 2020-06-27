@@ -7,14 +7,15 @@ import { Alert, Select } from "antd";
 import "../index.css";
 import {
   getSingleOrder,
-  updateOrderPlaced,
-  updateOrderProcessing,
-  updateOrderUnderconstruction,
-  updateOrderReady,
-  updateOrderFinished,
   getStatusValues,
   updateOrderStatus,
-  updateOrderFile1
+  updateOrderFile1,
+  updateOrderConfirmed,
+  updateEngineerAssignment,
+  updateFloorplanReady,
+  updateSecondPhase,
+  updateFinalPhase,
+  updateCompleteWork,
 } from "./apiAdmin";
 import moment from "moment";
 import "../index.css";
@@ -23,7 +24,7 @@ import { FaRegSun, FaAngleRight, FaUserCog } from "react-icons/fa";
 
 const { Option } = Select;
 
-const SingleOrder = props => {
+const SingleOrder = (props) => {
   const [values, setValues] = useState({
     fileLink: "",
     doc: "",
@@ -31,7 +32,7 @@ const SingleOrder = props => {
     assignedNumber: "",
     loading: false,
     errorFile: false,
-    formData: ""
+    formData: "",
   });
 
   const [order, setOrder] = useState({});
@@ -47,11 +48,11 @@ const SingleOrder = props => {
     assignedName,
     assignedNumber,
     errorFile,
-    formData
+    formData,
   } = values;
 
-  const loadSingleOrder = orderId => {
-    getSingleOrder(orderId, user._id, token).then(data => {
+  const loadSingleOrder = (orderId) => {
+    getSingleOrder(orderId, user._id, token).then((data) => {
       if (data.error) {
         setError(data.error);
       } else {
@@ -63,14 +64,14 @@ const SingleOrder = props => {
           fileLink: data.fileLink,
           assignedName: data.assignedName,
           assignedNumber: data.assignedNumber,
-          formData: new FormData()
+          formData: new FormData(),
         });
       }
     });
   };
 
   const loadStatusValues = () => {
-    getStatusValues(user._id, token).then(data => {
+    getStatusValues(user._id, token).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
@@ -82,7 +83,7 @@ const SingleOrder = props => {
   const handleOrderCancelled = (e, orderId) => {
     let { user, token } = isAuthenticated();
     updateOrderCancelled(user._id, token, orderId, e.target.value).then(
-      data => {
+      (data) => {
         if (data.error) {
           console.log("Status update failed");
         } else {
@@ -95,19 +96,21 @@ const SingleOrder = props => {
   };
 
   const handleOrderConfirm = (e, orderId) => {
-    updateOrderPlaced(user._id, token, orderId, e.target.value).then(data => {
-      if (data.error) {
-        console.log("Status update failed");
-      } else {
-        console.log("Status updated to Confirmed");
-        loadSingleOrder(orderId, user._id, token);
+    updateOrderConfirmed(user._id, token, orderId, e.target.value).then(
+      (data) => {
+        if (data.error) {
+          console.log("Status update failed");
+        } else {
+          console.log("Status updated to Confirmed");
+          loadSingleOrder(orderId, user._id, token);
+        }
       }
-    });
+    );
   };
 
-  const handleOrderProcessing = (e, orderId) => {
-    updateOrderProcessing(user._id, token, orderId, e.target.value).then(
-      data => {
+  const handleEngineerAssignment = (e, orderId) => {
+    updateEngineerAssignment(user._id, token, orderId, e.target.value).then(
+      (data) => {
         if (data.error) {
           console.log("Status update failed");
         } else {
@@ -117,9 +120,9 @@ const SingleOrder = props => {
     );
   };
 
-  const handleOrderUnderconstruction = (e, orderId) => {
-    updateOrderUnderconstruction(user._id, token, orderId, e.target.value).then(
-      data => {
+  const handleFloorplanReady = (e, orderId) => {
+    updateFloorplanReady(user._id, token, orderId, e.target.value).then(
+      (data) => {
         if (data.error) {
           console.log("Status update failed");
         } else {
@@ -129,8 +132,8 @@ const SingleOrder = props => {
     );
   };
 
-  const handleOrderReady = (e, orderId) => {
-    updateOrderReady(user._id, token, orderId, e.target.value).then(data => {
+  const handleSecondPhase = (e, orderId) => {
+    updateSecondPhase(user._id, token, orderId, e.target.value).then((data) => {
       if (data.error) {
         console.log("Status update failed");
       } else {
@@ -139,14 +142,26 @@ const SingleOrder = props => {
     });
   };
 
-  const handleOrderFinished = (e, orderId) => {
-    updateOrderFinished(user._id, token, orderId, e.target.value).then(data => {
+  const handleFinalPhase = (e, orderId) => {
+    updateFinalPhase(user._id, token, orderId, e.target.value).then((data) => {
       if (data.error) {
         console.log("Status update failed");
       } else {
         loadSingleOrder(orderId, user._id, token);
       }
     });
+  };
+
+  const handleCompleteWork = (e, orderId) => {
+    updateCompleteWork(user._id, token, orderId, e.target.value).then(
+      (data) => {
+        if (data.error) {
+          console.log("Status update failed");
+        } else {
+          loadSingleOrder(orderId, user._id, token);
+        }
+      }
+    );
   };
 
   const handleStatusChange = (e, orderId, orderEmail, orderMobile) => {
@@ -158,7 +173,7 @@ const SingleOrder = props => {
       e.target.value,
       orderEmail,
       orderMobile
-    ).then(data => {
+    ).then((data) => {
       if (data.error) {
         console.log("Status update failed");
       } else {
@@ -173,7 +188,7 @@ const SingleOrder = props => {
 
       <select
         className=" p-1 bg-white text-center text-dark "
-        onChange={e =>
+        onChange={(e) =>
           handleStatusChange(e, order._id, orderBy.email, orderBy.mobile)
         }
       >
@@ -189,17 +204,17 @@ const SingleOrder = props => {
     </div>
   );
 
-  const handleChange = name => event => {
+  const handleChange = (name) => (event) => {
     const value = name === "doc" ? event.target.files[0] : event.target.value;
     formData.set(name, value);
     setValues({ ...values, [name]: value, formData, errorFile: "" });
   };
-  const clickSubmit = event => {
+  const clickSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, errorFile: "", loading: true });
     const { user, token } = isAuthenticated();
     console.log(formData);
-    updateOrderFile1(order._id, user._id, token, formData).then(data => {
+    updateOrderFile1(order._id, user._id, token, formData).then((data) => {
       if (data.error) {
         setValues({ ...values, errorFile: data.error });
       } else {
@@ -210,7 +225,7 @@ const SingleOrder = props => {
           assignedName: "",
           assignedNumber: "",
           loading: false,
-          errorFile: false
+          errorFile: false,
         });
       }
     });
@@ -234,7 +249,7 @@ const SingleOrder = props => {
                 style={{
                   color: "#FFC107",
                   marginRight: "5px",
-                  marginBottom: "-4px"
+                  marginBottom: "-4px",
                 }}
               />
               Order Toggle Setting
@@ -248,7 +263,7 @@ const SingleOrder = props => {
                         style={{
                           color: "lightgreen",
                           marginRight: "5px",
-                          marginBottom: "-3px"
+                          marginBottom: "-3px",
                         }}
                       />
                       Confirm Order
@@ -257,7 +272,7 @@ const SingleOrder = props => {
                   <li className="list-inline-item">
                     <select
                       className="form-control"
-                      onChange={e => handleOrderConfirm(e, order._id)}
+                      onChange={(e) => handleOrderConfirm(e, order._id)}
                     >
                       <option disabled selected hidden>
                         (Yes/No)
@@ -275,16 +290,16 @@ const SingleOrder = props => {
                         style={{
                           color: "lightgreen",
                           marginRight: "5px",
-                          marginBottom: "-3px"
+                          marginBottom: "-3px",
                         }}
                       />
-                      Processing
+                      Engineer Assignment
                     </p>
                   </li>
                   <li className="list-inline-item">
                     <select
                       className="form-control"
-                      onChange={e => handleOrderProcessing(e, order._id)}
+                      onChange={(e) => handleEngineerAssignment(e, order._id)}
                     >
                       <option disabled selected hidden>
                         (Yes/No)
@@ -302,16 +317,16 @@ const SingleOrder = props => {
                         style={{
                           color: "lightgreen",
                           marginRight: "5px",
-                          marginBottom: "-3px"
+                          marginBottom: "-3px",
                         }}
                       />
-                      Under Construction
+                      FloorPlan Ready
                     </p>
                   </li>
                   <li className="list-inline-item">
                     <select
                       className="form-control"
-                      onChange={e => handleOrderUnderconstruction(e, order._id)}
+                      onChange={(e) => handleFloorplanReady(e, order._id)}
                     >
                       <option disabled selected hidden>
                         (Yes/No)
@@ -329,16 +344,16 @@ const SingleOrder = props => {
                         style={{
                           color: "lightgreen",
                           marginRight: "5px",
-                          marginBottom: "-3px"
+                          marginBottom: "-3px",
                         }}
                       />
-                      Ready
+                      Second Phase
                     </p>
                   </li>
                   <li className="list-inline-item">
                     <select
                       className="form-control"
-                      onChange={e => handleOrderReady(e, order._id)}
+                      onChange={(e) => handleSecondPhase(e, order._id)}
                     >
                       <option disabled selected hidden>
                         (Yes/No)
@@ -356,16 +371,16 @@ const SingleOrder = props => {
                         style={{
                           color: "lightgreen",
                           marginRight: "5px",
-                          marginBottom: "-3px"
+                          marginBottom: "-3px",
                         }}
                       />
-                      Finished
+                      Final Phase
                     </p>
                   </li>
                   <li className="list-inline-item">
                     <select
                       className="form-control"
-                      onChange={e => handleOrderFinished(e, order._id)}
+                      onChange={(e) => handleFinalPhase(e, order._id)}
                     >
                       <option disabled selected hidden>
                         (Yes/No){" "}
@@ -383,7 +398,34 @@ const SingleOrder = props => {
                         style={{
                           color: "lightgreen",
                           marginRight: "5px",
-                          marginBottom: "-3px"
+                          marginBottom: "-3px",
+                        }}
+                      />
+                      Complete Work
+                    </p>
+                  </li>
+                  <li className="list-inline-item">
+                    <select
+                      className="form-control"
+                      onChange={(e) => handleCompleteWork(e, order._id)}
+                    >
+                      <option disabled selected hidden>
+                        (Yes/No){" "}
+                      </option>
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
+                    </select>
+                  </li>
+                </ul>
+
+                <ul className="list-inline">
+                  <li className="list-inline-item">
+                    <p class="font-weight-bold text-success">
+                      <FaAngleRight
+                        style={{
+                          color: "lightgreen",
+                          marginRight: "5px",
+                          marginBottom: "-3px",
                         }}
                       />
                       Customer Cancellation Option
@@ -392,7 +434,7 @@ const SingleOrder = props => {
                   <li className="list-inline-item">
                     <select
                       className="form-control"
-                      onChange={e => handleOrderCancelled(e, order._id)}
+                      onChange={(e) => handleOrderCancelled(e, order._id)}
                     >
                       <option disabled selected hidden>
                         (Yes/No)
@@ -539,14 +581,14 @@ const SingleOrder = props => {
                 style={{
                   color: "#FFC107",
                   marginRight: "5px",
-                  marginBottom: "-3px"
+                  marginBottom: "-3px",
                 }}
               />
               <span
                 style={{
                   color: "lightgreen",
                   textTransform: "uppercase",
-                  marginRight: "2px"
+                  marginRight: "2px",
                 }}
               >
                 {orderBy.name}

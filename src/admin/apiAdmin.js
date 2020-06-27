@@ -6,14 +6,14 @@ export const createCategory = (userId, token, category) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(category)
+    body: JSON.stringify(category),
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 };
@@ -23,26 +23,26 @@ export const createProduct = (userId, token, product) => {
     method: "POST",
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: product
+    body: product,
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 };
 
 export const getCategories = () => {
   return fetch(`${API}/categories`, {
-    method: "GET"
+    method: "GET",
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 // Coupon Api's
@@ -52,66 +52,66 @@ export const createCoupon = (token, coupon) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(coupon)
+    body: JSON.stringify(coupon),
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 };
 
 export const getCoupon = ({ code }) => {
   return fetch(`${API}/coupon/${code}`, {
-    method: "GET"
+    method: "GET",
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 export const getUserBalance = ({ userId }) => {
   return fetch(`${API}/wallet/balance/${userId}`, {
-    method: "GET"
+    method: "GET",
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
-export const addUserWallet = payload => {
+export const addUserWallet = (payload) => {
   return fetch(`${API}/wallet/add/${payload.userId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${payload.token}`
+      Authorization: `Bearer ${payload.token}`,
     },
-    body: JSON.stringify(payload.wallet)
+    body: JSON.stringify(payload.wallet),
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
-export const deductUserWallet = payload => {
+export const deductUserWallet = (payload) => {
   return fetch(`${API}/wallet/deduct/${payload.userId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${payload.token}`
+      Authorization: `Bearer ${payload.token}`,
     },
-    body: JSON.stringify(payload.wallet)
+    body: JSON.stringify(payload.wallet),
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 export const listOrders = (userId, token) => {
@@ -119,13 +119,13 @@ export const listOrders = (userId, token) => {
     method: "GET",
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 export const getStatusValues = (userId, token) => {
@@ -133,13 +133,13 @@ export const getStatusValues = (userId, token) => {
     method: "GET",
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 export const updateOrderStatus = (
@@ -155,14 +155,14 @@ export const updateOrderStatus = (
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ status, orderId, orderEmail, orderMobile })
+    body: JSON.stringify({ status, orderId, orderEmail, orderMobile }),
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 /**
@@ -175,12 +175,12 @@ export const updateOrderStatus = (
 
 export const getProducts = () => {
   return fetch(`${API}/products?limit=undefined`, {
-    method: "GET"
+    method: "GET",
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 export const deleteProduct = (productId, userId, token) => {
@@ -189,23 +189,23 @@ export const deleteProduct = (productId, userId, token) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
-export const getProduct = productId => {
+export const getProduct = (productId) => {
   return fetch(`${API}/product/${productId}`, {
-    method: "GET"
+    method: "GET",
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 export const getSingleOrder = (orderId, userId, token) => {
@@ -214,13 +214,13 @@ export const getSingleOrder = (orderId, userId, token) => {
 
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 export const updateProduct = (productId, userId, token, product) => {
@@ -228,99 +228,121 @@ export const updateProduct = (productId, userId, token, product) => {
     method: "PUT",
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: product
+    body: product,
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
+// ORDER_UPADTE_ALL_IN_ONE
 
-export const updateOrderPlaced = (userId, token, orderId, placed) => {
-  return fetch(`${API}/order/${orderId}/placed/${userId}`, {
+export const updateOrderConfirmed = (userId, token, orderId, placed) => {
+  return fetch(`${API}/order/${orderId}/orderconfirmed/${userId}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ placed, orderId })
+    body: JSON.stringify({ placed, orderId }),
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
-export const updateOrderProcessing = (userId, token, orderId, processing) => {
-  return fetch(`${API}/order/${orderId}/processing/${userId}`, {
+export const updateEngineerAssignment = (
+  userId,
+  token,
+  orderId,
+  processing
+) => {
+  return fetch(`${API}/order/${orderId}/engineerassignment/${userId}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ processing, orderId })
+    body: JSON.stringify({ processing, orderId }),
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
-export const updateOrderUnderconstruction = (
+export const updateFloorplanReady = (
   userId,
   token,
   orderId,
   underconstruction
 ) => {
-  return fetch(`${API}/order/${orderId}/underconstruction/${userId}`, {
+  return fetch(`${API}/order/${orderId}/floorplanready/${userId}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ underconstruction, orderId })
+    body: JSON.stringify({ underconstruction, orderId }),
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
-export const updateOrderReady = (userId, token, orderId, ready) => {
-  return fetch(`${API}/order/${orderId}/ready/${userId}`, {
+export const updateSecondPhase = (userId, token, orderId, ready) => {
+  return fetch(`${API}/order/${orderId}/secondphase/${userId}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ ready, orderId })
+    body: JSON.stringify({ ready, orderId }),
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
-export const updateOrderFinished = (userId, token, orderId, finished) => {
-  return fetch(`${API}/order/${orderId}/finished/${userId}`, {
+export const updateFinalPhase = (userId, token, orderId, finished) => {
+  return fetch(`${API}/order/${orderId}/finalphase/${userId}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ finished, orderId })
+    body: JSON.stringify({ finished, orderId }),
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
+};
+
+export const updateCompleteWork = (userId, token, orderId, finished) => {
+  return fetch(`${API}/order/${orderId}/completework/${userId}`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ finished, orderId }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
 };
 
 export const updateOrderFile1 = (orderId, userId, token, order) => {
@@ -328,12 +350,12 @@ export const updateOrderFile1 = (orderId, userId, token, order) => {
     method: "PUT",
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: order
+    body: order,
   })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
