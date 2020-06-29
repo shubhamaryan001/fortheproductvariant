@@ -552,7 +552,7 @@ const SingleOrder = (props) => {
 
                   <div className="form-group">
                     <label className="text-muted font-weight-bold">
-                      File Link
+                      Floor Plan Upload
                     </label>
                     <input
                       onChange={handleChange("fileLink1")}
@@ -564,7 +564,7 @@ const SingleOrder = (props) => {
 
                   <div className="form-group">
                     <label className="text-muted font-weight-bold">
-                      File Link
+                      Second Phase( Structure and 3D)
                     </label>
                     <input
                       onChange={handleChange("fileLink2")}
@@ -576,7 +576,7 @@ const SingleOrder = (props) => {
 
                   <div className="form-group">
                     <label className="text-muted font-weight-bold">
-                      File Link
+                      Design Files(False ceiling)
                     </label>
                     <input
                       onChange={handleChange("fileLink3")}
@@ -588,7 +588,7 @@ const SingleOrder = (props) => {
 
                   <div className="form-group">
                     <label className="text-muted font-weight-bold">
-                      File Link
+                      Final Files (all Final Files Combine)
                     </label>
                     <input
                       onChange={handleChange("finalfileLink")}
