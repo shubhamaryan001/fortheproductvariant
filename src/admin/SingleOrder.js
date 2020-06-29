@@ -26,7 +26,10 @@ const { Option } = Select;
 
 const SingleOrder = (props) => {
   const [values, setValues] = useState({
-    fileLink: "",
+    fileLink1: "",
+    fileLink2: "",
+    fileLink3: "",
+    finalfileLink: "",
     doc: "",
     assignedName: "",
     assignedNumber: "",
@@ -44,7 +47,10 @@ const SingleOrder = (props) => {
   const { user, token } = isAuthenticated();
 
   const {
-    fileLink,
+    fileLink1,
+    fileLink2,
+    fileLink3,
+    finalfileLink,
     assignedName,
     assignedNumber,
     errorFile,
@@ -61,7 +67,10 @@ const SingleOrder = (props) => {
         console.log(data);
         setValues({
           ...values,
-          fileLink: data.fileLink,
+          fileLink1: data.fileLink1,
+          fileLink2: data.fileLink2,
+          fileLink3: data.fileLink3,
+          finalfileLink: data.finalfileLink,
           assignedName: data.assignedName,
           assignedNumber: data.assignedNumber,
           formData: new FormData(),
@@ -220,7 +229,10 @@ const SingleOrder = (props) => {
       } else {
         setValues({
           ...values,
-          fileLink: "",
+          fileLink1: "",
+          fileLink2: "",
+          fileLink3: "",
+          finalfileLink: "",
           doc: "",
           assignedName: "",
           assignedNumber: "",
@@ -543,10 +555,46 @@ const SingleOrder = (props) => {
                       File Link
                     </label>
                     <input
-                      onChange={handleChange("fileLink")}
+                      onChange={handleChange("fileLink1")}
                       type="text"
                       className="form-control"
-                      value={fileLink}
+                      value={fileLink1}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="text-muted font-weight-bold">
+                      File Link
+                    </label>
+                    <input
+                      onChange={handleChange("fileLink2")}
+                      type="text"
+                      className="form-control"
+                      value={fileLink2}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="text-muted font-weight-bold">
+                      File Link
+                    </label>
+                    <input
+                      onChange={handleChange("fileLink3")}
+                      type="text"
+                      className="form-control"
+                      value={fileLink3}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="text-muted font-weight-bold">
+                      File Link
+                    </label>
+                    <input
+                      onChange={handleChange("finalfileLink")}
+                      type="text"
+                      className="form-control"
+                      value={finalfileLink}
                     />
                   </div>
 
