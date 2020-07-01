@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionItemButton,
   AccordionItemHeading,
-  AccordionItemPanel
+  AccordionItemPanel,
 } from "react-accessible-accordion";
 import "react-accessible-accordion/dist/fancy-example.css";
 import SideBar from "./SideBar";
@@ -21,7 +21,9 @@ const Orders = () => {
   const { user, token } = isAuthenticated();
 
   const loadOrders = () => {
-    listOrders(user._id, token).then(data => {
+    const { user, token } = isAuthenticated();
+
+    listOrders(user._id, token).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
@@ -32,7 +34,7 @@ const Orders = () => {
   };
 
   const loadStatusValues = () => {
-    getStatusValues(user._id, token).then(data => {
+    getStatusValues(user._id, token).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
@@ -64,7 +66,7 @@ const Orders = () => {
   const getfilter = orders.filter(
     (order, index, orders) => order.ready === true
   );
-  const sort = orders.sort(function(a, b) {
+  const sort = orders.sort(function (a, b) {
     if (a.createdAt < b.createdAt) return 1;
     if (a.createdAt > b.createdAt) return -1;
   });
@@ -114,7 +116,7 @@ const Orders = () => {
       e.target.value,
       orderEmail,
       orderMobile
-    ).then(data => {
+    ).then((data) => {
       if (data.error) {
         console.log("Status update failed");
       } else {
@@ -122,13 +124,13 @@ const Orders = () => {
       }
     });
   };
-  const showStatus = o => (
+  const showStatus = (o) => (
     <div className="form-group">
       <h3 className="mark mb-4">Status: {o.status}</h3>
 
       <select
         className="form-control"
-        onChange={e =>
+        onChange={(e) =>
           handleStatusChange(e, o._id, o.OrderedBy.email, o.OrderedBy.mobile)
         }
       >
@@ -182,6 +184,7 @@ const Orders = () => {
                         <ul className="list-inlin">
                           <li class="list-inline-item">User Register Mobile</li>
                           <li class="list-inline-item">{o.OrderedBy.mobile}</li>
+                          {/* {console.log(o, o.OrderedBy)} */}
                         </ul>
                       </div>
                       <Link

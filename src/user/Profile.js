@@ -19,13 +19,13 @@ class Profile extends Component {
       error: "",
       fileSize: 0,
       loading: false,
-      about: ""
+      about: "",
     };
   }
 
-  init = userId => {
+  init = (userId) => {
     const token = isAuthenticated().token;
-    read(userId, token).then(data => {
+    read(userId, token).then((data) => {
       if (data.error) {
         this.setState({ redirectToProfile: true });
       } else {
@@ -37,7 +37,7 @@ class Profile extends Component {
           role: data.role,
           wallet_balance: data.wallet_balance,
           error: "",
-          about: data.about
+          about: data.about,
         });
         console.log(data);
       }
@@ -55,7 +55,7 @@ class Profile extends Component {
     if (fileSize > 1000000) {
       this.setState({
         error: "File size should be less than 100kb",
-        loading: false
+        loading: false,
       });
       return false;
     }
@@ -67,21 +67,21 @@ class Profile extends Component {
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       this.setState({
         error: "A valid Email is required",
-        loading: false
+        loading: false,
       });
       return false;
     }
     if (password.length >= 1 && password.length <= 5) {
       this.setState({
         error: "Password must be at least 6 characters long",
-        loading: false
+        loading: false,
       });
       return false;
     }
     return true;
   };
 
-  handleChange = name => event => {
+  handleChange = (name) => (event) => {
     this.setState({ error: "" });
     const value = name === "photo" ? event.target.files[0] : event.target.value;
 
@@ -90,7 +90,7 @@ class Profile extends Component {
     this.setState({ [name]: value, fileSize });
   };
 
-  clickSubmit = event => {
+  clickSubmit = (event) => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -98,17 +98,17 @@ class Profile extends Component {
       const userId = this.props.match.params.userId;
       const token = isAuthenticated().token;
 
-      update(userId, token, this.userData).then(data => {
+      update(userId, token, this.userData).then((data) => {
         if (data.error) {
           this.setState({ error: data.error });
         } else if (isAuthenticated().user.role === "admin") {
           this.setState({
-            redirectToProfile: true
+            redirectToProfile: true,
           });
         } else {
           updateUser(data, () => {
             this.setState({
-              redirectToProfile: true
+              redirectToProfile: true,
             });
           });
         }
@@ -213,7 +213,7 @@ class Profile extends Component {
       loading,
       about,
       role,
-      wallet_balance
+      wallet_balance,
     } = this.state;
 
     if (redirectToProfile) {
